@@ -1,1 +1,0 @@
-# life_pet_client
