@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -11,6 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="0"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
         android:textSize="50sp" />
 
     <ProgressBar
@@ -18,23 +20,27 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        />
+        android:layout_below="@+id/Lv"/>
 
     <TextView
         android:id="@+id/exp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="0/500" />
+        android:text="0/500"
+        android:layout_below="@+id/progressBar"/>
+
     <TextView
         android:id="@+id/friend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="0" />
+        android:text="0"
+        android:layout_below="@+id/exp"/>
 
     <Button
         android:id="@+id/easy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/friend"
         android:text="쉬움" />
 
     <Button
@@ -42,18 +48,55 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="보통"
-        />
+        android:layout_below="@+id/friend"
+        android:layout_toRightOf="@+id/easy"/>
 
     <Button
         android:id="@+id/hard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="어려움"
+        android:layout_below="@+id/friend"
+        android:layout_toRightOf="@+id/normal"
         />
     <Button
         android:id="@+id/dilemma"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="난제"
+        android:layout_below="@+id/friend"
+        android:layout_toRightOf="@+id/hard"
         />
-</LinearLayout>
+    <Button
+        android:id="@+id/easyF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/easy"
+        android:text="쉬움F" />
+
+    <Button
+        android:id="@+id/normalF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="보통F"
+        android:layout_below="@+id/normal"
+        android:layout_toRightOf="@+id/easyF"/>
+
+    <Button
+        android:id="@+id/hardF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="어려움F"
+        android:layout_below="@+id/hard"
+        android:layout_toRightOf="@+id/normalF"
+        />
+    <Button
+        android:id="@+id/dilemmaF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="난제F"
+        android:layout_below="@+id/dilemma"
+        android:layout_toRightOf="@+id/hardF"
+        />
+
+</RelativeLayout>
