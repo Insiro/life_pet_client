@@ -101,9 +101,11 @@ public class MainActivity extends AppCompatActivity {
     }
     public void react_exp(ProgressBar progressBar,TextView xp, TextView friends, TextView level,int achieve,boolean success){
         friendly=gain_friendly(achieve,success,friendly);
-        exp+=gain_exp(achieve,exp,friendly);
-        progressBar.setProgress((int)((exp/totalExp)*100));
-        xp.setText((int)exp+"/"+(int)totalExp);
+        if(success) {
+            exp += gain_exp(achieve, exp, friendly);
+            progressBar.setProgress((int) ((exp / totalExp) * 100));
+            xp.setText((int) exp + "/" + (int) totalExp);
+        }
         friends.setText(friendly+"");
         if(progressBar.getProgress()==100){
             exp-=totalExp;
