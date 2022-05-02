@@ -20,6 +20,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <acitivity
+            android:name=".Auth"
+            >
+
+        </acitivity>
+        <activity android:name=".authy.Register"/>
     </application>
 
 </manifest>
