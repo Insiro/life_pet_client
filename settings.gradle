@@ -14,3 +14,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "LifePet"
 include ':app'
+include ':entity'
