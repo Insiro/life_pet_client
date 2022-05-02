@@ -1,4 +1,9 @@
 package com.insiro.lifepet.entity
 
-class User {
+open class User {
+    protected lateinit var user_id:String
+    protected lateinit var nick_name:String
+    constructor(){
+
+    }
 }
