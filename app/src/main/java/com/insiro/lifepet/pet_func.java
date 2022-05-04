@@ -79,4 +79,5 @@ public class pet_func {
         return friendly;
     }
 
+
 }
