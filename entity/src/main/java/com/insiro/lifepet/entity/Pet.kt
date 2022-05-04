@@ -1,6 +1,8 @@
 package com.insiro.lifepet.entity
 
-open class Pet {
+import java.io.Serializable
+
+open class Pet : Serializable {
     private lateinit var id: String
     private lateinit var category: String
     private var intimacy: Int = 0
