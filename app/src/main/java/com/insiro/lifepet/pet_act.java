@@ -19,22 +19,22 @@ public class pet_act extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pet);
-        ProgressBar progressBar =findViewById(R.id.progressBar);
+        ProgressBar progressBar =findViewById(R.id.act_pet_progressBar);
         progressBar.setIndeterminate(false);
         progressBar.setProgress(0);
-        Button btn1=findViewById(R.id.easy);
-        Button btn2=findViewById(R.id.normal);
-        Button btn3=findViewById(R.id.hard);
-        Button btn4=findViewById(R.id.dilemma);
-        Button btn1F=findViewById(R.id.easyF);
-        Button btn2F=findViewById(R.id.normalF);
-        Button btn3F=findViewById(R.id.hardF);
-        Button btn4F=findViewById(R.id.dilemmaF);
-        TextView level=findViewById(R.id.Lv);
-        TextView xp=findViewById(R.id.exp);
-        ImageButton cat_img1=findViewById(R.id.catimg1);
-        ImageButton cat_img2=findViewById(R.id.catimg2);
-        TextView friends=findViewById(R.id.friend);
+        Button btn1=findViewById(R.id.act_pet_easy);
+        Button btn2=findViewById(R.id.act_pet_normal);
+        Button btn3=findViewById(R.id.act_pet_hard);
+        Button btn4=findViewById(R.id.act_pet_dilemma);
+        Button btn1F=findViewById(R.id.act_pet_easyF);
+        Button btn2F=findViewById(R.id.act_pet_normalF);
+        Button btn3F=findViewById(R.id.act_pet_hardF);
+        Button btn4F=findViewById(R.id.act_pet_dilemmaF);
+        TextView level=findViewById(R.id.act_pet_Lv);
+        TextView xp=findViewById(R.id.act_pet_exp);
+        ImageButton cat_img1=findViewById(R.id.act_pet_catimg1);
+        ImageButton cat_img2=findViewById(R.id.act_pet_catimg2);
+        TextView friends=findViewById(R.id.act_pet_friend);
         level.setText(pet_func.charLv+"");
         friends.setText(pet_func.friendly+"");
         btn1.setOnClickListener(new View.OnClickListener() {
