@@ -8,6 +8,7 @@ open class Achivement:Serializable {
     private lateinit var id:String
     private lateinit var user:String
     private lateinit var category:AchivementCategory
+    private var target = 0
     private var achive_time = 0
 
 }
