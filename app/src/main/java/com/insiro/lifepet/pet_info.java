@@ -3,28 +3,46 @@ package com.insiro.lifepet;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 public class pet_info extends AppCompatActivity {
 
+    ArrayList<pet_data> petInfoList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pet_info);
-        ImageView petImage =findViewById(R.id.pet_info_petimg);
-        TextView petName=findViewById(R.id.pet_info_name);
-        TextView petLv=findViewById(R.id.pet_info_Lv);
-        TextView petExp=findViewById(R.id.pet_info_exp);
-        TextView petFriendly=findViewById(R.id.pet_info_friendly);
+        this.InitializePetData();
         ListView petList=findViewById(R.id.pet_info_petlist);
+        final pet_adapter pAdapter= new pet_adapter(this, petInfoList);
 
-        petName.setText("길고양이");
-        petLv.setText(pet_func.charLv+"");
-        petExp.setText(pet_func.exp/pet_func.totalExp+"");
-        petFriendly.setText(pet_func.friendly+"/100");
+        petList.setAdapter(pAdapter);
+        petList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+            }
+        });
 
+    }
+    public void InitializePetData(){
+        petInfoList=new ArrayList<pet_data>();
+
+        petInfoList.add(new pet_data(R.drawable.littledeep_cat_file_style2,
+                "길고양이",pet_func.friendly,pet_func.exp,pet_func.charLv));
+        petInfoList.add(new pet_data(R.drawable.littledeep_cat_file_style1,
+                "길고양이",pet_func.friendly,pet_func.exp,pet_func.charLv));
+        petInfoList.add(new pet_data(R.drawable.littledeep_cat_file_style2,
+                "길고양이",pet_func.friendly,pet_func.exp,pet_func.charLv));
     }
 }
