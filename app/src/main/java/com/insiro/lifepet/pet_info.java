@@ -27,12 +27,6 @@ public class pet_info extends AppCompatActivity {
         final pet_adapter pAdapter= new pet_adapter(this, petInfoList);
 
         petList.setAdapter(pAdapter);
-        petList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-        });
 
     }
     public void InitializePetData(){
