@@ -1,9 +1,9 @@
 package com.insiro.lifepet.entity
 
-open class User {
-    protected lateinit var user_id:String
-    protected lateinit var nick_name:String
-    constructor(){
+import kotlinx.serialization.Serializable
 
-    }
-}
+@Serializable
+data class User (
+    var user_id:String,
+    var nick_name:String)
+
