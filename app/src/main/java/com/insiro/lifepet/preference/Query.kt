@@ -24,7 +24,8 @@ enum class Action(val str: String){
     Get("get"),
     Update("update"),
     Load("load"),
-    Add("add");
+    Add("add"),
+    Remove("remove");
 
 }
 enum class Field(val str:String){

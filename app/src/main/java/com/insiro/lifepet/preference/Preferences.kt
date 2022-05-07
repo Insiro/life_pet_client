@@ -61,7 +61,7 @@ class Preferences : AppCompatActivity() {
                 var queryData = this.queryReader.getData(query.field) ?: return
                 this.data.addField(query.field, queryData.data)
             }
-
+            Action.Remove -> TODO()
         }
     }
 }

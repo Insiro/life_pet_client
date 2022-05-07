@@ -13,7 +13,7 @@ open class QueryBundle(protected val bundle: Bundle) {
 
 
 open class QueryBundleBuilder() : QueryBundle(Bundle()) {
-    fun addQuery(query: Query, data: QueryData?):QueryBundleBuilder {
+    fun addQuery(query: Query, data: QueryData? = null):QueryBundleBuilder {
         bundle.putString(queryString(this.count), query.toString())
         this.count++
         if (data != null)
