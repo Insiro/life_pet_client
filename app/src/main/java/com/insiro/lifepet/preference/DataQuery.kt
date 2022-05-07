@@ -7,15 +7,15 @@ import kotlinx.serialization.json.Json
 import java.lang.Exception
 
 
-open class DataQuery (var field: Field, var action: Action, var index: Int = -1){
+open class DataQuery (var field: Field, var action: Action, var index: Int = 0){
 
     override fun toString():String{
-        return String.format("%s:%s:%d",this.field.str,this.action.str,this.index+1)
+        return String.format("%s:%s:%d",this.field.str,this.action.str,this.index)
     }
     companion object{
         fun fromString(str:String): DataQuery {
             val splist = str.split(":")
-            return DataQuery(Field.valueOf(splist[0]), Action.valueOf(splist[1]),splist[2].toInt()-1)
+            return DataQuery(Field.valueOf(splist[0]), Action.valueOf(splist[1]),splist[2].toInt())
         }
     }
 }
