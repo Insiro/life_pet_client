@@ -7,6 +7,9 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.insiro.lifepet.R
+import com.insiro.lifepet.entity.User
+import com.insiro.lifepet.entity.UserFull
+import com.insiro.lifepet.preference.*
 
 class Auth:AppCompatActivity() {
     lateinit var edit_id:EditText
@@ -29,6 +32,13 @@ class Auth:AppCompatActivity() {
             //TODO: send HTTP Request for auth
             val status = false
             if (status){
+                var user = UserFull(id,"testUser", "user@example.com","0000000000","testUser")
+                val bundle = QueryBundleBuilder().addQuery(Query(Field.User,Action.Update),
+                    QueryData(user,Field.User)
+                ).build()
+                val intent = Intent()
+                intent.putExtras(bundle)
+                startActivity(intent)
                 //TODO: activity move to dashboard
             }
             else{
