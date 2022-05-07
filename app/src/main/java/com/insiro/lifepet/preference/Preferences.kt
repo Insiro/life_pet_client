@@ -36,7 +36,7 @@ class Preferences : AppCompatActivity() {
     private fun getRequests() {
         val count = this.queryReader.getQueryCount()
         for (i: Int in 0..count) {
-            var query = this.queryReader.getQuery()
+            val query = this.queryReader.getQuery()
             if (query != null) {
                 processQuery(query)
             }
@@ -54,14 +54,14 @@ class Preferences : AppCompatActivity() {
                 sendingDataBuilder.nextWithoutData()
             }
             Action.Update -> {
-                var queryData = this.queryReader.getData(query.field) ?: return
+                val queryData = this.queryReader.getData(query.field) ?: return
                 this.data.updateField(query.field, queryData.data, query.index)
             }
             Action.Add -> {
-                var queryData = this.queryReader.getData(query.field) ?: return
+                val queryData = this.queryReader.getData(query.field) ?: return
                 this.data.addField(query.field, queryData.data)
             }
-            Action.Remove -> TODO()
+            Action.Remove -> this.data.removeField(query.field, query.index)
         }
     }
 }
@@ -163,6 +163,7 @@ class Data(pref: SharedPreferences) {
 
     //endregion
     //region Commit
+    //TODO: Upload Data to Server on Commits
     fun commitField(field: Field) {
         when (field) {
             Field.All -> {
@@ -180,7 +181,6 @@ class Data(pref: SharedPreferences) {
             else -> {}
         }
     }
-
     private fun commitUser() {
         if (this.user != null)
             this.editor.putString("user", Json.encodeToString(this.user))
@@ -256,9 +256,47 @@ class Data(pref: SharedPreferences) {
             Field.Pets -> this.pets.add(data as Pet)
             Field.User -> {}
             Field.Friends -> this.friends.add(data as User)
+            else ->{}
         }
     }
 
+    //endregion
+    //region Remove
+    fun removeField(field: Field,index: Int){
+        when (field) {
+            Field.All -> {
+                this.achievements = ArrayList()
+                this.friends = ArrayList()
+                this.habits = ArrayList()
+                this.pets = ArrayList()
+                this.user = null
+            }
+            Field.Achievements -> {
+                if (index==-1)
+                    this.achievements = ArrayList()
+                else this.achievements.removeAt(index)
+            }
+            Field.Habits -> {
+                if (index==-1)
+                    this.habits = ArrayList()
+                else this.habits.removeAt(index)
+            }
+            Field.Pets -> {
+                if (index==-1)
+                    this.pets = ArrayList()
+                else this.pets.removeAt(index)
+            }
+            Field.User -> {
+                this.user = null
+            }
+            Field.Friends -> {
+                if (index==-1)
+                    this.friends = ArrayList()
+                else this.friends.removeAt(index)
+            }
+            else -> {}
+        }
+    }
     //endregion
     //region Sync
     private fun syncAchieveCates() {
