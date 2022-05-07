@@ -1,5 +1,6 @@
 package com.insiro.lifepet.preference
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -12,8 +13,7 @@ class Preferences : AppCompatActivity() {
 
     private lateinit var data: Data
     private lateinit var queryReader: QueryBundleReader
-    private val sendingDataBuilder = ResponseDataBuilder(Bundle())
-    private var dataCount = 0
+    private val sendingDataBuilder = ResponseBundleBuilder(Bundle())
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         data = Data(getSharedPreferences("userInfo", MODE_PRIVATE))
@@ -22,26 +22,35 @@ class Preferences : AppCompatActivity() {
             this.queryReader = QueryBundleReader(reqData)
             getRequests()
         }
+        sendResult()
 
+    }
+
+    private fun sendResult() {
+        val intent = Intent()
+        intent.putExtras(sendingDataBuilder.build())
+        setResult(0, intent)
+        finish()
     }
 
     private fun getRequests() {
         val count = this.queryReader.getQueryCount()
         for (i: Int in 0..count) {
             var query = this.queryReader.getQuery()
-            if (query!=null){
+            if (query != null) {
                 processQuery(query)
             }
         }
     }
-    private fun processQuery(query:DataQuery){
+
+    private fun processQuery(query: Query) {
         when (query.action) {
             Action.Commit -> this.data.commitField(query.field)
             Action.Load -> this.data.loadField(query.field)
             Action.Get -> {
                 val result = this.data.getField(query.field, query.index)
-                if (result !=null)
-                    sendingDataBuilder.addData(QueryData(result,query.field))
+                if (result != null)
+                    sendingDataBuilder.addData(QueryData(result, query.field))
                 sendingDataBuilder.nextWithoutData()
             }
             Action.Update -> {
@@ -196,7 +205,7 @@ class Data(pref: SharedPreferences) {
 
     //endregion
     //region Update
-    fun updateField(field: Field, data:Any, index: Int) {
+    fun updateField(field: Field, data: Any, index: Int) {
         when (field) {
             Field.Achievements -> updateAchievements(data as Achievement, index)
             Field.Habits -> updateHabits(data as Habit, index)
@@ -249,6 +258,7 @@ class Data(pref: SharedPreferences) {
             Field.Friends -> this.friends.add(data as User)
         }
     }
+
     //endregion
     //region Sync
     private fun syncAchieveCates() {
