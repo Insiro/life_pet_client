@@ -211,16 +211,10 @@ class Data(pref: SharedPreferences) {
             Field.Achievements -> updateAchievements(data as Achievement, index)
             Field.Habits -> updateHabits(data as Habit, index)
             Field.Pets -> updatePets(data as Pet, index)
-            Field.User -> updateUser(data as UserFull)
+            Field.User -> this.user = data as UserFull
             Field.Friends -> updateFriends(data as User, index)
             else -> {}
         }
-    }
-
-    private fun updateUser(user: UserFull) {
-        if (this.user == null)
-            return
-        this.user = user
     }
 
     private fun updatePets(pet: Pet, index: Int) {
