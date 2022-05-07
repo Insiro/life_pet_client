@@ -14,8 +14,8 @@ open class Query (var field: Field, var action: Action, var index: Int = 0){
     }
     companion object{
         fun fromString(str:String): Query {
-            val splist = str.split(":")
-            return Query(Field.valueOf(splist[0]), Action.valueOf(splist[1]),splist[2].toInt())
+            val spList = str.split(":")
+            return Query(Field.valueOf(spList[0]), Action.valueOf(spList[1]),spList[2].toInt())
         }
     }
 }
@@ -25,8 +25,8 @@ enum class Action(val str: String){
     Update("update"),
     Load("load"),
     Add("add"),
-    Remove("remove");
-
+    Remove("remove"),
+    Sync("sync");
 }
 enum class Field(val str:String){
     All("all"),
@@ -40,7 +40,7 @@ enum class Field(val str:String){
 
 open class QueryData(val data: Any, val field: Field) {
     fun serialize(): String {
-        var seData = when (this.field) {
+        val seData = when (this.field) {
             Field.User -> Json.encodeToString(this.data as UserFull)
             Field.Achievements -> Json.encodeToString(this.data as Achievement)
             Field.Pets -> Json.encodeToString(this.data as Pet)
@@ -53,7 +53,7 @@ open class QueryData(val data: Any, val field: Field) {
 
     companion object {
         fun deSerialize(str: String, field: Field): QueryData {
-            var seData: Any = when (field) {
+            val seData: Any = when (field) {
                 Field.User -> Json.decodeFromString<UserFull>(str)
                 Field.Achievements -> Json.decodeFromString<Achievement>(str)
                 Field.Pets -> Json.decodeFromString<Pet>(str)

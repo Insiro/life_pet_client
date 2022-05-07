@@ -62,6 +62,7 @@ class Preferences : AppCompatActivity() {
                 this.data.addField(query.field, queryData.data)
             }
             Action.Remove -> this.data.removeField(query.field, query.index)
+            Action.Sync->this.data.syncField(query.field)
         }
     }
 }
@@ -299,6 +300,12 @@ class Data(pref: SharedPreferences) {
     }
     //endregion
     //region Sync
+    fun syncField(field: Field){
+        when (field) {
+            Field.AchieveCate -> syncAchieveCates()
+            else ->TODO("Sync field from server")
+        }
+    }
     private fun syncAchieveCates() {
         this.editor.putString("achieveCate", Json.encodeToString(this.achievementCategories))
     }
