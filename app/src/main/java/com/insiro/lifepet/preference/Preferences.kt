@@ -11,36 +11,47 @@ import com.insiro.lifepet.entity.*
 class Preferences : AppCompatActivity() {
 
     private lateinit var data: Data
+    private lateinit var queryReader: QueryBundleReader
+    private val sendingDataBuilder = ResponseDataBuilder(Bundle())
+    private var dataCount = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         data = Data(getSharedPreferences("userInfo", MODE_PRIVATE))
-        val receiveData = intent.extras
-        if (receiveData != null)
-            getRequests(receiveData)
+        val reqData = intent.extras
+        if (reqData != null) {
+            this.queryReader = QueryBundleReader(reqData)
+            getRequests()
+        }
 
     }
 
-    private fun getRequests(data: Bundle) {
-        val count = data.getInt("count")
-        var request: String? = null
+    private fun getRequests() {
+        val count = this.queryReader.getQueryCount()
         for (i: Int in 0..count) {
-            request = data.getString(String.format("Query%d", i))
-            if (request != null)
-                processRequest(request,i,data)
+            var query = this.queryReader.getQuery()
+            if (query!=null){
+                processQuery(query)
+            }
         }
     }
-
-    private fun processRequest(request: String, index:Int,data:Bundle) {
-        val query = DataQuery.fromString(request)
+    private fun processQuery(query:DataQuery){
         when (query.action) {
             Action.Commit -> this.data.commitField(query.field)
             Action.Load -> this.data.loadField(query.field)
-            Action.Get -> this.data.getField(query.field, query.index)
-            Action.Update -> {
-                val receiveStr = data.getString(String.format("Data%d", index))
-                this.data.updateField(query.field, receiveStr!!, query.index)
+            Action.Get -> {
+                val result = this.data.getField(query.field, query.index)
+                if (result !=null)
+                    sendingDataBuilder.addData(QueryData(result,query.field))
+                sendingDataBuilder.nextWithoutData()
             }
-            Action.Add-> TODO("AddUser")
+            Action.Update -> {
+                var queryData = this.queryReader.getData(query.field) ?: return
+                this.data.updateField(query.field, queryData.data, query.index)
+            }
+            Action.Add -> {
+                var queryData = this.queryReader.getData(query.field) ?: return
+                this.data.addField(query.field, queryData.data)
+            }
 
         }
     }
@@ -56,22 +67,19 @@ class Data(pref: SharedPreferences) {
     private var achievements = ArrayList<Achievement>()
     private var achievementCategories = ArrayList<AchievementCategory>()
 
-    //region Get
+    //region Getter
     fun getField(field: Field, index: Int): Any? {
         when (field) {
             Field.AchieveCate -> return this.achievementCategories
             Field.Achievements -> {
-                if (index == -1) return this.achievements
                 if (index > this.achievements.size) return null
                 return this.achievements[index]
             }
             Field.Habits -> {
-                if (index ==-1)return this.habits
                 if (index > this.habits.size) return null
                 return this.habits[index]
             }
             Field.Pets -> {
-                if(index ==-1)return this.pets
                 if (index > this.pets.size) return null
                 return this.pets[index]
             }
@@ -79,8 +87,7 @@ class Data(pref: SharedPreferences) {
                 return this.user
             }
             Field.Friends -> {
-                if (index ==-1)return this.pets
-                if (index>this.friends.size)return null
+                if (index > this.friends.size) return null
                 return this.friends[index]
             }
             else -> {
@@ -161,7 +168,7 @@ class Data(pref: SharedPreferences) {
             Field.Pets -> commitPets()
             Field.User -> commitUser()
             Field.Friends -> commitFriends()
-            else ->{}
+            else -> {}
         }
     }
 
@@ -189,15 +196,14 @@ class Data(pref: SharedPreferences) {
 
     //endregion
     //region Update
-    fun updateField(field: Field, receiveStr: String, index: Int) {
+    fun updateField(field: Field, data:Any, index: Int) {
         when (field) {
-            Field.Achievements -> updateAchievements(Json.decodeFromString(receiveStr), index)
-            Field.Habits -> updateHabits(Json.decodeFromString(receiveStr), index)
-            Field.Pets -> updatePets(Json.decodeFromString(receiveStr), index)
-            Field.User -> updateUser(Json.decodeFromString(receiveStr))
-            Field.Friends -> updateFriends(Json.decodeFromString(receiveStr), index)
-            Field.AchieveCate -> syncAchieveCates()
-            else ->{}
+            Field.Achievements -> updateAchievements(data as Achievement, index)
+            Field.Habits -> updateHabits(data as Habit, index)
+            Field.Pets -> updatePets(data as Pet, index)
+            Field.User -> updateUser(data as UserFull)
+            Field.Friends -> updateFriends(data as User, index)
+            else -> {}
         }
     }
 
@@ -231,8 +237,25 @@ class Data(pref: SharedPreferences) {
         this.achievements[index] = achievement
     }
 
+    //endregion
+    //region Add
+    fun addField(field: Field, data: Any) {
+        when (field) {
+            Field.AchieveCate -> {}
+            Field.Achievements -> this.achievements.add(data as Achievement)
+            Field.Habits -> this.habits.add(data as Habit)
+            Field.Pets -> this.pets.add(data as Pet)
+            Field.User -> {}
+            Field.Friends -> this.friends.add(data as User)
+        }
+    }
+    //endregion
+    //region Sync
     private fun syncAchieveCates() {
         this.editor.putString("achieveCate", Json.encodeToString(this.achievementCategories))
     }
+    //TODO: Sync From Server or File
     //endregion
+
+
 }
