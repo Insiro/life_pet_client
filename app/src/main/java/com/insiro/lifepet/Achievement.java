@@ -1,4 +1,4 @@
-package com.insiro.lifepet.preference;
+package com.insiro.lifepet;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
 
-public class achievement extends AppCompatActivity {
+public class Achievement extends AppCompatActivity {
     private Spinner spinner;
     ArrayList<String> arrayList;
     ArrayAdapter<String> arrayAdapter;
@@ -30,7 +30,7 @@ public class achievement extends AppCompatActivity {
         arrayList.add("진행중인 업적");
 
         arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, arrayList);
-        spinner = (Spinner)findViewById(R.id.spinner);
+        spinner = (Spinner)findViewById(R.id.achieve_spinner);
         spinner.setAdapter(arrayAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -44,7 +44,7 @@ public class achievement extends AppCompatActivity {
             }
         });
 
-        plus = findViewById(R.id.detail);
+        plus = findViewById(R.id.achieve_detail);
         plus.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){

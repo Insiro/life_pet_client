@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.insiro.lifepet.Achievement
 import kotlinx.serialization.*
 import kotlinx.serialization.json.Json
 import com.insiro.lifepet.entity.*
