@@ -34,7 +34,7 @@
         android:layout_marginTop="10dp"/>
 
 
-    <!-- Todo: 대표 업적을 받아와서 적용하기   -->
+    <!-- Todo: 대표 업적을 받아와서 적용하기 (preference??)  -->
 
     <Spinner
         android:id="@+id/achieve_spinner"
@@ -47,9 +47,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.6"
         app:layout_constraintHorizontal_bias="0.2" />
-
-
-    <!-- Todo: +를 눌러서 해당하는 업적을 추가로 볼 수 있게 하며, 이 과정에서 intent를 통해 전부 넘겨받아 compare 해서 출력해주는 형식으로 하자 -->
 
     <Button
         android:id="@+id/achieve_detail"
