@@ -1,4 +1,4 @@
-package com.insiro.lifepet;
+package com.insiro.lifepet.pet;
 
 public class pet_data {
     private String petCategory;

@@ -1,4 +1,4 @@
-package com.insiro.lifepet;
+package com.insiro.lifepet.pet;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,8 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
+
+import com.insiro.lifepet.R;
+import com.insiro.lifepet.pet.pet_data;
+import com.insiro.lifepet.pet.pet_func;
 
 import java.util.ArrayList;
 
@@ -51,7 +54,7 @@ public class pet_adapter extends BaseAdapter {
         petId.setText(sample.get(position).getId()+"");
         petCategory.setText(sample.get(position).getPetCategory());
         petLv.setText(sample.get(position).getLevel()+"");
-        petExp.setText(sample.get(position).getExp()+"/"+pet_func.totalExp);
+        petExp.setText(sample.get(position).getExp()+"/"+ pet_func.totalExp);
         petFriendly.setText(sample.get(position).getIntimacy()+"/100");
         return view;
     }

@@ -1,4 +1,4 @@
-package com.insiro.lifepet;
+package com.insiro.lifepet.pet;
 
 import android.view.View;
 import android.widget.ImageButton;
