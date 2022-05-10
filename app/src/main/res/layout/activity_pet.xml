@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<TextView
+    android:id="@+id/act_pet_information"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="50dp"
+    android:text="정보"/>
+
+    <ImageView
+        android:id="@+id/act_pet_bubble"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/act_pet_information"
+        android:layout_marginTop="8dp"
+
+        android:scaleType="fitXY"
+        android:src="@drawable/bubble" />
+
+    <ImageButton
+        android:id="@+id/act_pet_catimg1"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/littledeep_cat_file_style2"
+        android:layout_below="@+id/act_pet_bubble"
+        android:visibility="visible"
+        />
+
+    <ImageButton
+        android:id="@+id/act_pet_catimg2"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/act_pet_bubble"
+        android:scaleType="fitCenter"
+        android:src="@drawable/littledeep_cat_file_style1"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/act_pet_Lv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/act_pet_catimg1"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="-191dp"
+        android:text="0"
+        android:textSize="30sp" />
+
+    <ProgressBar
+        android:id="@+id/act_pet_progressBar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@+id/act_pet_catimg1"
+        android:layout_marginTop="-1dp" />
+
+    <TextView
+        android:id="@+id/act_pet_exp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="0/500"
+        android:layout_below="@+id/act_pet_progressBar"/>
+
+    <TextView
+        android:id="@+id/act_pet_friend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:layout_below="@+id/act_pet_exp"/>
+
+    <Button
+        android:id="@+id/act_pet_easy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/act_pet_friend"
+        android:text="쉬움" />
+
+    <Button
+        android:id="@+id/act_pet_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="보통"
+        android:layout_below="@+id/act_pet_friend"
+        android:layout_toRightOf="@+id/act_pet_easy"/>
+
+    <Button
+        android:id="@+id/act_pet_hard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="어려움"
+        android:layout_below="@+id/act_pet_friend"
+        android:layout_toRightOf="@+id/act_pet_normal"
+        />
+    <Button
+        android:id="@+id/act_pet_dilemma"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="난제"
+        android:layout_below="@+id/act_pet_friend"
+        android:layout_toRightOf="@+id/act_pet_hard"
+        />
+    <Button
+        android:id="@+id/act_pet_easyF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/act_pet_easy"
+        android:text="쉬움F" />
+
+    <Button
+        android:id="@+id/act_pet_normalF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="보통F"
+        android:layout_below="@+id/act_pet_normal"
+        android:layout_toRightOf="@+id/act_pet_easyF"/>
+
+    <Button
+        android:id="@+id/act_pet_hardF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="어려움F"
+        android:layout_below="@+id/act_pet_hard"
+        android:layout_toRightOf="@+id/act_pet_normalF"
+        />
+    <Button
+        android:id="@+id/act_pet_dilemmaF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="난제F"
+        android:layout_below="@+id/act_pet_dilemma"
+        android:layout_toRightOf="@+id/act_pet_hardF"
+        />
+
+</RelativeLayout>

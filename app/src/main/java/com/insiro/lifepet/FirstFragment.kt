@@ -1,5 +1,6 @@
 package com.insiro.lifepet
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -34,6 +35,10 @@ class FirstFragment : Fragment() {
 
         binding.buttonFirst.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        }
+        binding.moveActivity.setOnClickListener {
+            val nextIntent= Intent(context,pet_info::class.java);
+            startActivity(nextIntent);
         }
     }
 

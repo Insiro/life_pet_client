@@ -23,6 +23,8 @@
         <activity android:name=".authy.Auth"/>
 
         <activity android:name=".authy.Register"/>
+        <activity android:name=".pet_info"/>
+        <activity android:name=".pet_act"/>
     </application>
 
 </manifest>
