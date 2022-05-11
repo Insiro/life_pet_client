@@ -6,7 +6,6 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="18.3dp"
@@ -16,7 +15,6 @@
         android:layout_margin="10dp">
 
         <RelativeLayout
-            android:id="@+id/firstLin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"

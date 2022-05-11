@@ -22,7 +22,7 @@ class Additional_Achievement: AppCompatActivity() {
         setContentView(R.layout.additional_achieve)
 
         val Adapter = ListAdapter(this, AchieveList)
-        val list_view : ListView = findViewById(R.id.list_view)
+        val list_view : ListView = findViewById(R.id.additional_achieve_ListView)
         list_view.adapter = Adapter
 
         val intent = getIntent()
