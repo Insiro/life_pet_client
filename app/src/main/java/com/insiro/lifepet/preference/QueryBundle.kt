@@ -38,7 +38,8 @@ open class QueryBundleBuilder() : QueryBundle(Bundle()) {
 }
 
 open class QueryBundleReader(bundle: Bundle) : QueryBundle(bundle) {
-    private var max = 0
+    var max = 0
+    private set
 
     init {
         max = this.bundle.getInt("count")

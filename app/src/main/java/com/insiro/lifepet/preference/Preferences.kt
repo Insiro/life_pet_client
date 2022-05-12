@@ -4,10 +4,10 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.insiro.lifepet.Achievement
-import kotlinx.serialization.*
-import kotlinx.serialization.json.Json
 import com.insiro.lifepet.entity.*
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 
 class Preferences : AppCompatActivity() {
@@ -19,12 +19,15 @@ class Preferences : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         data = Data(getSharedPreferences("userInfo", MODE_PRIVATE))
         val reqData = intent.extras
-        if (reqData != null) {
-            this.queryReader = QueryBundleReader(reqData)
-            getRequests()
-        }
-        sendResult()
+        handle_reqData(reqData!!)
 
+
+    }
+
+    private fun handle_reqData(reqData: Bundle) {
+        this.queryReader = QueryBundleReader(reqData)
+        getRequests()
+        sendResult()
     }
 
     private fun sendResult() {
@@ -51,7 +54,7 @@ class Preferences : AppCompatActivity() {
             Action.Get -> {
                 val result = this.data.getField(query.field, query.index)
                 if (result != null)
-                    sendingDataBuilder.addData(QueryData(result, query.field))
+                    sendingDataBuilder.addData(QueryData(result, query.field, query.index == -1))
                 sendingDataBuilder.nextWithoutData()
             }
             Action.Update -> {
@@ -63,13 +66,12 @@ class Preferences : AppCompatActivity() {
                 this.data.addField(query.field, queryData.data)
             }
             Action.Remove -> this.data.removeField(query.field, query.index)
-            Action.Sync->this.data.syncField(query.field)
+            Action.Sync -> this.data.syncField(query.field)
         }
     }
 }
 
-class Data(pref: SharedPreferences) {
-    private lateinit var pref: SharedPreferences
+class Data(private val pref: SharedPreferences) {
     private var editor: SharedPreferences.Editor = pref.edit()
     private var user: UserFull? = null
     private var habits = ArrayList<Habit>()
@@ -84,14 +86,17 @@ class Data(pref: SharedPreferences) {
             Field.AchieveCate -> return this.achievementCategories
             Field.Achievements -> {
                 if (index > this.achievements.size) return null
+                if (index ==-1) return this.achievements
                 return this.achievements[index]
             }
             Field.Habits -> {
                 if (index > this.habits.size) return null
+                if (index ==-1) return this.habits
                 return this.habits[index]
             }
             Field.Pets -> {
                 if (index > this.pets.size) return null
+                if (index == -1) return this.pets
                 return this.pets[index]
             }
             Field.User -> {
@@ -99,6 +104,7 @@ class Data(pref: SharedPreferences) {
             }
             Field.Friends -> {
                 if (index > this.friends.size) return null
+                if (index == -1) return this.friends
                 return this.friends[index]
             }
             else -> {
@@ -183,26 +189,27 @@ class Data(pref: SharedPreferences) {
             else -> {}
         }
     }
+
     private fun commitUser() {
         if (this.user != null)
-            this.editor.putString("user", Json.encodeToString(this.user))
-        else this.editor.remove("user")
+            this.editor.putString(Field.User.str, Json.encodeToString(this.user))
+        else this.editor.remove(Field.User.str)
     }
 
     private fun commitPets() {
-        this.editor.putString("pet", Json.encodeToString(this.pets))
+        this.editor.putString(Field.Pets.str, Json.encodeToString(this.pets))
     }
 
     private fun commitFriends() {
-        this.editor.putString("friends", Json.encodeToString(this.friends))
+        this.editor.putString(Field.Friends.str, Json.encodeToString(this.friends))
     }
 
     private fun commitHabits() {
-        this.editor.putString("habit", Json.encodeToString(this.habits))
+        this.editor.putString(Field.Habits.str, Json.encodeToString(this.habits))
     }
 
     private fun commitAchievements() {
-        this.editor.putString("achieve", Json.encodeToString(this.achievements))
+        this.editor.putString(Field.Achievements.str, Json.encodeToString(this.achievements))
     }
 
     //endregion
@@ -252,13 +259,13 @@ class Data(pref: SharedPreferences) {
             Field.Pets -> this.pets.add(data as Pet)
             Field.User -> {}
             Field.Friends -> this.friends.add(data as User)
-            else ->{}
+            else -> {}
         }
     }
 
     //endregion
     //region Remove
-    fun removeField(field: Field,index: Int){
+    fun removeField(field: Field, index: Int) {
         when (field) {
             Field.All -> {
                 this.achievements = ArrayList()
@@ -268,17 +275,17 @@ class Data(pref: SharedPreferences) {
                 this.user = null
             }
             Field.Achievements -> {
-                if (index==-1)
+                if (index == -1)
                     this.achievements = ArrayList()
                 else this.achievements.removeAt(index)
             }
             Field.Habits -> {
-                if (index==-1)
+                if (index == -1)
                     this.habits = ArrayList()
                 else this.habits.removeAt(index)
             }
             Field.Pets -> {
-                if (index==-1)
+                if (index == -1)
                     this.pets = ArrayList()
                 else this.pets.removeAt(index)
             }
@@ -286,23 +293,25 @@ class Data(pref: SharedPreferences) {
                 this.user = null
             }
             Field.Friends -> {
-                if (index==-1)
+                if (index == -1)
                     this.friends = ArrayList()
                 else this.friends.removeAt(index)
             }
             else -> {}
         }
     }
+
     //endregion
     //region Sync
-    fun syncField(field: Field){
+    fun syncField(field: Field) {
         when (field) {
             Field.AchieveCate -> syncAchieveCates()
-            else ->TODO("Sync field from server")
+            else -> TODO("Sync field from server")
         }
     }
+
     private fun syncAchieveCates() {
-        this.editor.putString("achieveCate", Json.encodeToString(this.achievementCategories))
+        this.editor.putString(Field.AchieveCate.str, Json.encodeToString(this.achievementCategories))
     }
     //TODO: Sync From Server or File
     //endregion
