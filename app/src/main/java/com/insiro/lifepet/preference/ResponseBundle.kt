@@ -4,7 +4,8 @@ import android.os.Bundle
 
 open class ResponseBundle(protected var bundle: Bundle) {
     protected var count = 0
-    protected var max = 0
+    var max = 0
+        protected set
 }
 
 open class ResponseBundleBuilder(private val bundle: Bundle) {
@@ -31,11 +32,11 @@ open class ResponseBundleReader(bundle: Bundle) : ResponseBundle(bundle) {
         this.max = this.bundle.getInt("count")
     }
 
-    fun getData(): QueryData? {
+    fun getData(isArray:Boolean): QueryData? {
         val fieldStr = bundle.getString(queryString(count)) ?: return null
         val field = Field.valueOf(fieldStr)
-        var data = bundle.getString(dataString(count)) ?: return null
-        return QueryData.deSerialize(data, field)
+        val data = bundle.getString(dataString(count)) ?: return null
+        return QueryData.deSerialize(data, field, isArray)
     }
 
     fun next() {
