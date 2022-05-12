@@ -1,10 +1,11 @@
-package com.insiro.lifepet;
+package com.insiro.lifepet.pet;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.ListView;
 
+import com.insiro.lifepet.R;
 import com.insiro.lifepet.pet.pet_adapter;
 import com.insiro.lifepet.pet.pet_data;
 import com.insiro.lifepet.pet.pet_func;
@@ -26,7 +27,7 @@ public class pet_info extends AppCompatActivity {
 
     }
     public void InitializePetData(){
-        petInfoList=new ArrayList<pet_data>();
+        petInfoList=new ArrayList();
 
         petInfoList.add(new pet_data(R.drawable.littledeep_cat_file_style2,
                 "길고양이", pet_func.friendly,pet_func.exp,pet_func.charLv));

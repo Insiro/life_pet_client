@@ -1,11 +1,6 @@
-package com.insiro.lifepet.preference
+package com.insiro.lifepet.dataManager
 
 import android.os.Bundle
-import androidx.core.os.bundleOf
-import com.insiro.lifepet.entity.*
-import kotlinx.serialization.*
-import kotlinx.serialization.json.Json
-import java.lang.Exception
 
 open class QueryBundle(protected val bundle: Bundle) {
     protected var count = 0

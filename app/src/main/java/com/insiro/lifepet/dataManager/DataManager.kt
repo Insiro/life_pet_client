@@ -1,4 +1,4 @@
-package com.insiro.lifepet.preference
+package com.insiro.lifepet.dataManager
 
 import android.content.Intent
 import android.content.SharedPreferences
@@ -10,7 +10,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 
-class Preferences : AppCompatActivity() {
+class DataManager : AppCompatActivity() {
 
     private lateinit var data: Data
     private lateinit var queryReader: QueryBundleReader
@@ -20,8 +20,6 @@ class Preferences : AppCompatActivity() {
         data = Data(getSharedPreferences("userInfo", MODE_PRIVATE))
         val reqData = intent.extras
         handle_reqData(reqData!!)
-
-
     }
 
     private fun handle_reqData(reqData: Bundle) {

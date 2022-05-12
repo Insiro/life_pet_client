@@ -7,9 +7,8 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.insiro.lifepet.R
-import com.insiro.lifepet.entity.User
 import com.insiro.lifepet.entity.UserFull
-import com.insiro.lifepet.preference.*
+import com.insiro.lifepet.dataManager.*
 
 class Auth : AppCompatActivity() {
     lateinit var edit_id: EditText

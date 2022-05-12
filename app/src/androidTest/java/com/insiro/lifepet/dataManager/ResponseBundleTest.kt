@@ -1,4 +1,4 @@
-package com.insiro.lifepet.preference
+package com.insiro.lifepet.dataManager
 
 import android.os.Bundle
 import android.util.Log

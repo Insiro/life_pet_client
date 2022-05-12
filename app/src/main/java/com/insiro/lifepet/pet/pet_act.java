@@ -1,4 +1,4 @@
-package com.insiro.lifepet;
+package com.insiro.lifepet.pet;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.insiro.lifepet.R;
 import com.insiro.lifepet.pet.pet_func;
 
 public class pet_act extends AppCompatActivity {

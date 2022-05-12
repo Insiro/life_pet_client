@@ -1,4 +1,4 @@
-package com.insiro.lifepet.preference
+package com.insiro.lifepet.dataManager
 
 fun queryString(index: Int): String {
     return String.format("query%d", index)

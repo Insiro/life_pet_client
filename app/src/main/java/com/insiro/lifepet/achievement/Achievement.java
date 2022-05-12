@@ -1,4 +1,4 @@
-package com.insiro.lifepet;
+package com.insiro.lifepet.achievement;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.insiro.lifepet.R;
+
 import java.util.ArrayList;
 
 
@@ -48,7 +51,7 @@ public class Achievement extends AppCompatActivity {
         plus.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(getApplicationContext(), Additional_Achievement.class);
+                Intent intent = new Intent(getApplicationContext(), AdditionalAchievement.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("option", spinner.getSelectedItemPosition());
                 intent.putExtras(bundle);

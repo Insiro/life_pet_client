@@ -1,11 +1,12 @@
-package com.insiro.lifepet
+package com.insiro.lifepet.achievement
 
 import android.os.Bundle
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
+import com.insiro.lifepet.R
 
-class Additional_Achievement: AppCompatActivity() {
-    var AchieveList = arrayListOf<achieve>(
+class AdditionalAchievement: AppCompatActivity() {
+    private val achieveList = arrayListOf<achieve>(
         achieve("화장실 가기",true,"100%"),
         achieve("몰랑",true,"100%"),
         achieve("동해물과",true,"100%"),
@@ -21,9 +22,9 @@ class Additional_Achievement: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.additional_achieve)
 
-        val Adapter = ListAdapter(this, AchieveList)
-        val list_view : ListView = findViewById(R.id.additional_achieve_ListView)
-        list_view.adapter = Adapter
+        val adapter = ListAdapter(this, achieveList)
+        val listView : ListView = findViewById(R.id.additional_achieve_ListView)
+        listView.adapter = adapter
 
         val intent = getIntent()
         val bundle = intent.extras

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.insiro.lifepet.databinding.FragmentFirstBinding
+import com.insiro.lifepet.pet.pet_info
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -37,8 +38,8 @@ class FirstFragment : Fragment() {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
         binding.moveActivity.setOnClickListener {
-            val nextIntent= Intent(context,pet_info::class.java);
-            startActivity(nextIntent);
+            val nextIntent= Intent(context, pet_info::class.java)
+            startActivity(nextIntent)
         }
     }
 

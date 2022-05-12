@@ -1,4 +1,4 @@
-package com.insiro.lifepet.preference
+package com.insiro.lifepet.dataManager
 
 import com.insiro.lifepet.entity.User
 import junit.framework.TestCase

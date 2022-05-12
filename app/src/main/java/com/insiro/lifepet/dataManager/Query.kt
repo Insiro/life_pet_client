@@ -1,8 +1,8 @@
 @file:Suppress("UNCHECKED_CAST")
 
-package com.insiro.lifepet.preference
+package com.insiro.lifepet.dataManager
 
-import com.insiro.lifepet.Achievement
+import com.insiro.lifepet.achievement.Achievement
 import com.insiro.lifepet.entity.*
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
