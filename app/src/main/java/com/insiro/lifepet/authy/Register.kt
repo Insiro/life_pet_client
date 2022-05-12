@@ -6,45 +6,52 @@ import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.insiro.lifepet.R
+import com.insiro.lifepet.entity.UserFull
 
-class Register:AppCompatActivity() {
-    lateinit var edit_id:EditText
-    lateinit var edit_pwd:EditText
-    lateinit var edit_name:EditText
-    lateinit var edit_nick:EditText
-    lateinit var edit_mail:EditText
-    lateinit var edit_call:EditText
-    lateinit var regist_btn:Button
+class Register : AppCompatActivity() {
+    private lateinit var editId: EditText
+    private lateinit var editPwd: EditText
+    private lateinit var editName: EditText
+    private lateinit var editNick: EditText
+    private lateinit var editMail: EditText
+    private lateinit var editCall: EditText
+    private lateinit var registBtn: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.auth_register)
         bind()
     }
-    private fun bind(){
-        edit_call = findViewById(R.id.regist_call)
-        edit_pwd = findViewById(R.id.regist_pwd)
-        edit_id = findViewById(R.id.regist_id)
-        edit_name = findViewById(R.id.regist_name)
-        edit_mail = findViewById(R.id.regist_mail)
-        edit_nick = findViewById(R.id.regist_nick)
-        regist_btn = findViewById(R.id.register_btn)
-        regist_btn.setOnClickListener {
+
+    private fun bind() {
+        editCall = findViewById(R.id.regist_call)
+        editPwd = findViewById(R.id.regist_pwd)
+        editId = findViewById(R.id.regist_id)
+        editName = findViewById(R.id.regist_name)
+        editMail = findViewById(R.id.regist_mail)
+        editNick = findViewById(R.id.regist_nick)
+        registBtn = findViewById(R.id.register_btn)
+        registBtn.setOnClickListener {
+            val userFull = UserFull(
+                editId.text.toString(),
+                editNick.text.toString(),
+                editMail.text.toString(),
+                editCall.text.toString(),
+                editName.text.toString()
+            )
             //TODO: request register and check result of api
-            var result =false
-            if (result){
-                val dialog_builder = AlertDialog.Builder(this)
-                dialog_builder.setMessage("가입에 성공하였습니다")
-                dialog_builder.create()
-                dialog_builder.show()
+            var result = false
+            val dialogBuilder = AlertDialog.Builder(this)
+            if (result) {
+                dialogBuilder.setMessage("가입에 성공하였습니다")
+                dialogBuilder.create()
+                dialogBuilder.show()
                 finish()
-            }
-            else{
-                if (false){
+            } else {
+                if (false) {
                     //TODO: check reason is id
-                    val dialog_builder = AlertDialog.Builder(this)
-                    dialog_builder.setMessage("ID가 중복되었습니다.")
-                    dialog_builder.create()
-                    dialog_builder.show()
+                    dialogBuilder.setMessage("ID가 중복되었습니다.")
+                    dialogBuilder.create()
+                    dialogBuilder.show()
                 }
             }
         }
