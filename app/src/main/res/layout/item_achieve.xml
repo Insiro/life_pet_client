@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18.3dp"
+        android:layout_marginEnd="18.7dp"
+        android:layout_marginTop="11dp"
+        card_view:cardCornerRadius="17dp"
+        android:layout_margin="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#ffffff"
+            android:padding="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/item_achieve_image"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:layout_margin="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:src="@mipmap/ic_launcher" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/item_achieve_image"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/item_achieve_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:text="업적 이름" /> <!-- 물 마시기 -->
+
+                    <TextView
+                        android:id="@+id/item_achieve_whether"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="12dp"
+                        android:text="달성/미달성"/> <!-- 달성 했으면 달성 표시 미달성이면 미달성 표시 -->
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_below="@+id/item_achieve_image">
+
+                    <TextView
+                        android:id="@+id/item_achieve_percent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="달성 비율"
+                        android:textSize="15dp" /> <!-- 78% -->
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

@@ -2,6 +2,7 @@
 
 package com.insiro.lifepet.preference
 
+import com.insiro.lifepet.Achievement
 import com.insiro.lifepet.entity.*
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
