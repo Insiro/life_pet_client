@@ -48,16 +48,13 @@ public class Achievement extends AppCompatActivity {
         });
 
         plus = findViewById(R.id.achieve_detail);
-        plus.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(getApplicationContext(), AdditionalAchievement.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt("option", spinner.getSelectedItemPosition());
-                intent.putExtras(bundle);
+        plus.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), AdditionalAchievement.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("option", spinner.getSelectedItemPosition());
+            intent.putExtras(bundle);
 
-                startActivity(intent);
-            }
+            startActivity(intent);
         });
     }
 

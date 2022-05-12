@@ -38,66 +38,38 @@ public class pet_act extends AppCompatActivity {
         TextView friends=findViewById(R.id.act_pet_friend);
         level.setText(pet_func.charLv+"");
         friends.setText(pet_func.friendly+"");
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pet_func.react_exp(progressBar,xp,friends,level,0,true);
-                if(pet_func.charLv==10){
-                    pet_func.change_img(cat_img1,cat_img2);
-                    Toast.makeText(getApplicationContext(),"Level up",Toast.LENGTH_SHORT).show();
-                }
+        btn1.setOnClickListener(view -> {
+            pet_func.react_exp(progressBar,xp,friends,level,0,true);
+            if(pet_func.charLv==10){
+                pet_func.change_img(cat_img1,cat_img2);
+                Toast.makeText(getApplicationContext(),"Level up",Toast.LENGTH_SHORT).show();
             }
         });
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pet_func.react_exp(progressBar,xp,friends,level,1,true);
-                if(pet_func.charLv==10){
-                    pet_func.change_img(cat_img1,cat_img2);
-                    Toast.makeText(getApplicationContext(),"Level up",Toast.LENGTH_SHORT).show();
-                }
+        btn2.setOnClickListener(view -> {
+            pet_func.react_exp(progressBar,xp,friends,level,1,true);
+            if(pet_func.charLv==10){
+                pet_func.change_img(cat_img1,cat_img2);
+                Toast.makeText(getApplicationContext(),"Level up",Toast.LENGTH_SHORT).show();
             }
         });
-        btn3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pet_func.react_exp(progressBar,xp,friends,level,2,true);
-                if(pet_func.charLv==10){
-                    pet_func.change_img(cat_img1,cat_img2);
-                    Toast.makeText(getApplicationContext(),"Level up",Toast.LENGTH_SHORT).show();
-                }
+        btn3.setOnClickListener(view -> {
+            pet_func.react_exp(progressBar,xp,friends,level,2,true);
+            if(pet_func.charLv==10){
+                pet_func.change_img(cat_img1,cat_img2);
+                Toast.makeText(getApplicationContext(),"Level up",Toast.LENGTH_SHORT).show();
             }
         });
-        btn4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pet_func.react_exp(progressBar,xp,friends,level,3,true);
-                if(pet_func.charLv==10){
-                    pet_func.change_img(cat_img1,cat_img2);
-                    Toast.makeText(getApplicationContext(),"Level up",Toast.LENGTH_SHORT).show();
-                }
+        btn4.setOnClickListener(view -> {
+            pet_func.react_exp(progressBar,xp,friends,level,3,true);
+            if(pet_func.charLv==10){
+                pet_func.change_img(cat_img1,cat_img2);
+                Toast.makeText(getApplicationContext(),"Level up",Toast.LENGTH_SHORT).show();
             }
         });
-        btn1F.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pet_func.react_exp(progressBar,xp,friends,level,0,false);            }
-        });
-        btn2F.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pet_func.react_exp(progressBar,xp,friends,level,1,false);            }
-        });
-        btn3F.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pet_func.react_exp(progressBar,xp,friends,level,2,false);            }
-        });
-        btn4F.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pet_func.react_exp(progressBar,xp,friends,level,3,false);            }
-        });
+        btn1F.setOnClickListener(view -> pet_func.react_exp(progressBar,xp,friends,level,0,false));
+        btn2F.setOnClickListener(view -> pet_func.react_exp(progressBar,xp,friends,level,1,false));
+        btn3F.setOnClickListener(view -> pet_func.react_exp(progressBar,xp,friends,level,2,false));
+        btn4F.setOnClickListener(view -> pet_func.react_exp(progressBar,xp,friends,level,3,false));
     }
 
 }
