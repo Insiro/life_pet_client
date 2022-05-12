@@ -4,26 +4,28 @@ import android.os.Bundle
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.insiro.lifepet.R
+import com.insiro.lifepet.entity.Achievement
+import com.insiro.lifepet.entity.AchievementCategory
 
-class AdditionalAchievement: AppCompatActivity() {
-    private val achieveList = arrayListOf<achieve>(
-        achieve("화장실 가기",true,"100%"),
-        achieve("몰랑",true,"100%"),
-        achieve("동해물과",true,"100%"),
-        achieve("물 마시기",false,"56%"),
-        achieve("하루 3끼",false,"79%"),
-        achieve("헬로헬로",true,"100%"),
-        achieve("아 뭐해야되냐",false,"78%"),
-        achieve("이상없이 제대로",true,"100%"),
-        achieve("제발",false,"15%")
-    )
+class AdditionalAchievement : AppCompatActivity() {
+    private val dummyCate = AchievementCategory("dummyCate", "dummyCate", "dummy")
+    private val achieveList = arrayListOf<Achievement>(
+        Achievement("dummy1", "dummyUser", dummyCate, 10, 10),
+        Achievement("dummy2", "dummyUser", dummyCate, 10, 10),
+        Achievement("dummy3", "dummyUser", dummyCate, 10, 10),
+        Achievement("dummy4", "dummyUser", dummyCate, 10, 10),
+        Achievement("dummy5", "dummyUser", dummyCate, 10, 10),
+        Achievement("dummy6", "dummyUser", dummyCate, 10, 10),
+        Achievement("dummy7", "dummyUser", dummyCate, 10, 10),
+
+        )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.additional_achieve)
 
         val adapter = ListAdapter(this, achieveList)
-        val listView : ListView = findViewById(R.id.additional_achieve_ListView)
+        val listView: ListView = findViewById(R.id.additional_achieve_ListView)
         listView.adapter = adapter
 
         val intent = getIntent()
@@ -38,7 +40,6 @@ class AdditionalAchievement: AppCompatActivity() {
             3 -> "진행중인 업적"
             else -> "업적"
         }
-
 
 
     }

@@ -7,27 +7,26 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.insiro.lifepet.R
+import com.insiro.lifepet.entity.Achievement
 
-class ListAdapter (val context: Context, val UserList: ArrayList<achieve>) : BaseAdapter() {
+class ListAdapter(val context: Context, val achieveList: ArrayList<Achievement>) : BaseAdapter() {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.item_achieve, null)
         val name: TextView = view.findViewById(R.id.item_achieve_name)
-        val whether: TextView = view.findViewById(R.id.item_achieve_whether)
         val percent: TextView = view.findViewById(R.id.item_achieve_percent)
 
-        val user = UserList[position]
+        val achieve = achieveList[position]
 
-        name.text = user.name
-        whether.text = whether.text
-        percent.text = user.percent
+        name.text = achieve.category.name
+        percent.text = String.format("%d", achieve.achieved_time / achieve.target * 100)
 
         return view
     }
 
 
     override fun getItem(position: Int): Any {
-        return UserList[position]
+        return achieveList[position]
     }
 
 
@@ -37,6 +36,6 @@ class ListAdapter (val context: Context, val UserList: ArrayList<achieve>) : Bas
 
 
     override fun getCount(): Int {
-        return UserList.size
+        return achieveList.size
     }
 }
