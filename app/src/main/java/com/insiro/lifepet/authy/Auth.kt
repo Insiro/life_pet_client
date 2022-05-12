@@ -33,8 +33,9 @@ class Auth : AppCompatActivity() {
             //TODO: send HTTP Request for auth
             val status = false
             if (status) {
-                var user = UserFull(id, "testUser", "user@example.com", "0000000000", "testUser")
+                val user = UserFull(id, "testUser", "user@example.com", "0000000000", "testUser")
                 val bundle = QueryBundleBuilder()
+                    .addQuery(Query(Field.User, Action.Activate))
                     .addQuery(
                         Query(Field.User, Action.Update),
                         QueryData(user, Field.User)

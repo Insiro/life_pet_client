@@ -25,12 +25,12 @@ open class Query(var field: Field, var action: Action, var index: Int = 0) {
 
 enum class Action(val str: String) {
     Commit("Commit"),
-    Get("get"),
-    Update("update"),
-    Load("load"),
-    Add("add"),
-    Remove("remove"),
-    Sync("sync");
+    Get("Get"),
+    Update("Update"),
+    Activate("Activate"),
+    Add("Add"),
+    Remove("Remove"),
+    Sync("Sync");
 }
 
 enum class Field(val str: String) {

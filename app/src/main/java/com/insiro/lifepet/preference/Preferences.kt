@@ -50,7 +50,7 @@ class Preferences : AppCompatActivity() {
     private fun processQuery(query: Query) {
         when (query.action) {
             Action.Commit -> this.data.commitField(query.field)
-            Action.Load -> this.data.loadField(query.field)
+            Action.Activate -> this.data.activateField(query.field)
             Action.Get -> {
                 val result = this.data.getField(query.field, query.index)
                 if (result != null)
@@ -120,7 +120,7 @@ class Data(private val pref: SharedPreferences) {
         this.user = Json.decodeFromString(userStr)
     }
 
-    fun loadField(field: Field) {
+    fun activateField(field: Field) {
         when (field) {
             Field.All -> loadAllData()
             Field.Achievements -> loadAchievements()
