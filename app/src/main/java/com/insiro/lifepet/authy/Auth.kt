@@ -1,5 +1,6 @@
 package com.insiro.lifepet.authy
 
+import android.R.id
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -7,15 +8,17 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.insiro.lifepet.R
-import com.insiro.lifepet.entity.User
 import com.insiro.lifepet.entity.UserFull
 import com.insiro.lifepet.preference.*
+
 
 class Auth : AppCompatActivity() {
     lateinit var edit_id: EditText
     lateinit var edit_pwd: EditText
     lateinit var sign_btn: Button
     lateinit var register_btn: Button
+    var id: String=""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.auth)
@@ -40,6 +43,9 @@ class Auth : AppCompatActivity() {
                         QueryData(user, Field.User)
                     ).addQuery(Query(Field.User, Action.Commit))
                     .build()
+
+                sharedPreference()//회원가입을 진행 한 경우 내부 DB에 ID를 저장하여 재접속을 하였을 때 바로 Dashboard로 이동하기 위함
+
                 val intent = Intent()
                 intent.putExtras(bundle)
                 startActivity(intent)
@@ -54,5 +60,13 @@ class Auth : AppCompatActivity() {
 
             startActivity(intent)
         }
+    }
+
+    // ID를 내부 DB에 저장하기
+    fun sharedPreference() {
+        val sh_Pref = getSharedPreferences("LoginID", MODE_PRIVATE)
+        val toEdit = sh_Pref.edit()
+        toEdit.putString("ID", id)
+        toEdit.commit()
     }
 }

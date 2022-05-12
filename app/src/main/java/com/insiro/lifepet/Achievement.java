@@ -17,11 +17,17 @@ public class Achievement extends AppCompatActivity {
     ArrayList<String> arrayList;
     ArrayAdapter<String> arrayAdapter;
     Button plus;
+    String Id;//유저 아이디
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.achievement);
+
+        //Activity간의 ID 교환으로 인해 bundle에서 가져오기
+        Intent intent= getIntent();
+        Bundle bundle=intent.getExtras();
+        Id = bundle.getString("ID");
 
         arrayList = new ArrayList<>();
         arrayList.add("달성 업적");
@@ -51,6 +57,7 @@ public class Achievement extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), Additional_Achievement.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("option", spinner.getSelectedItemPosition());
+                bundle.putString("id", Id);//Activity간의 ID 교환
                 intent.putExtras(bundle);
 
                 startActivity(intent);
