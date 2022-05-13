@@ -1,5 +1,7 @@
 package com.insiro.lifepet.pet;
 
+import static java.lang.String.format;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +17,8 @@ import com.insiro.lifepet.pet.pet_func;
 import java.util.ArrayList;
 
 public class pet_adapter extends BaseAdapter {
-    Context pContext=null;
-    LayoutInflater pLayoutInflater=null;
+    Context pContext;
+    LayoutInflater pLayoutInflater;
     ArrayList<pet_data> sample;
 
     public pet_adapter(Context context, ArrayList<pet_data> data){
@@ -41,21 +43,15 @@ public class pet_adapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view=pLayoutInflater.inflate(R.layout.petlistview,null);
+        View view=pLayoutInflater.inflate(R.layout.card_item,null);
 
-        ImageView petImage =view.findViewById(R.id.pet_info_petimg);
-        TextView petId=view.findViewById(R.id.pet_info_id);
-        TextView petCategory=view.findViewById(R.id.pet_info_category);
-        TextView petLv=view.findViewById(R.id.pet_info_Lv);
-        TextView petExp=view.findViewById(R.id.pet_info_exp);
-        TextView petFriendly=view.findViewById(R.id.pet_info_friendly);
+        ImageView petImage =view.findViewById(R.id.item_image);
+        TextView petCategory=view.findViewById(R.id.item_sub);
+        TextView petLv=view.findViewById(R.id.item_desc);
 
         petImage.setImageResource(sample.get(position).getId());
-        petId.setText(sample.get(position).getId()+"");
         petCategory.setText(sample.get(position).getPetCategory());
-        petLv.setText(sample.get(position).getLevel()+"");
-        petExp.setText(sample.get(position).getExp()+"/"+ pet_func.totalExp);
-        petFriendly.setText(sample.get(position).getIntimacy()+"/100");
+        petLv.setText(format("%d", sample.get(position).getLevel()));
         return view;
     }
 }
