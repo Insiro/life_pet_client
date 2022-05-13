@@ -12,9 +12,9 @@ import com.insiro.lifepet.entity.Achievement
 class ListAdapter(val context: Context, val achieveList: ArrayList<Achievement>) : BaseAdapter() {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view: View = LayoutInflater.from(context).inflate(R.layout.item_achieve, null)
-        val name: TextView = view.findViewById(R.id.item_achieve_name)
-        val percent: TextView = view.findViewById(R.id.item_achieve_percent)
+        val view: View = LayoutInflater.from(context).inflate(R.layout.card_item, null)
+        val name: TextView = view.findViewById(R.id.item_name)
+        val percent: TextView = view.findViewById(R.id.item_sub)
 
         val achieve = achieveList[position]
 
