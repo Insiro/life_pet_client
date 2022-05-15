@@ -5,18 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<TextView
-    android:id="@+id/act_pet_information"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textSize="50dp"
-    android:text="정보"/>
+    <TextView
+        android:id="@+id/act_pet_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="이름"
+        android:textSize="50dp" />
 
     <ImageView
         android:id="@+id/act_pet_bubble"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_below="@+id/act_pet_information"
+        android:layout_below="@+id/act_pet_category"
         android:layout_marginTop="8dp"
 
         android:scaleType="fitXY"

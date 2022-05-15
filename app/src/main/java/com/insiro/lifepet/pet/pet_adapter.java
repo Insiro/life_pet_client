@@ -11,8 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.insiro.lifepet.R;
-import com.insiro.lifepet.pet.pet_data;
-import com.insiro.lifepet.pet.pet_func;
 
 import java.util.ArrayList;
 

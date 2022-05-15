@@ -1,17 +1,48 @@
 package com.insiro.lifepet.pet;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.insiro.lifepet.dataManager.Action;
+import com.insiro.lifepet.dataManager.Field;
+import com.insiro.lifepet.dataManager.Query;
+import com.insiro.lifepet.dataManager.QueryBundleBuilder;
+
+import java.util.ArrayList;
+
 public class pet_func {
 
-    public static float exp=0;
+    public static double exp=0;
     public static int friendly=0;
     public static int charLv=0;
-    public static float totalExp=500;
-    public static float gain_exp(int achieve,float exp, float friendly) {
+    public static double totalExp=500;
+    public static String category;
+
+    public static void setCategory(String category) {
+        pet_func.category = category;
+    }
+
+    public static void setCharLv(int charLv) {
+        pet_func.charLv = charLv;
+    }
+
+    public static void setExp(double exp) {
+        pet_func.exp = exp;
+    }
+
+    public static void setFriendly(int friendly) {
+        pet_func.friendly = friendly;
+    }
+
+    public static void setTotalExp(int Lv) {
+        pet_func.totalExp = 500*Math.pow(1.2,Lv-1);
+    }
+
+    public static double gain_exp(int achieve, double exp, double friendly) {
         if(achieve==0)
             exp=50*((100+friendly)/100);
         else if(achieve==1)
