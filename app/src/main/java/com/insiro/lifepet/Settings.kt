@@ -48,7 +48,7 @@ class SettingsNode(
 
 class SettingsAdapter(preferenceName: String, private val context: Context) :
     BaseAdapter() {
-    private lateinit var settingsList: ArrayList<SettingsNode>
+    private var settingsList= ArrayList<SettingsNode>()
     private lateinit var settings: SettingField
     private var inflater: LayoutInflater
     val pref: SharedPreferences =
@@ -56,7 +56,8 @@ class SettingsAdapter(preferenceName: String, private val context: Context) :
     val editor: SharedPreferences.Editor = pref.edit()
 
     init {
-        for (filed in settings::class.memberProperties.toList()) {
+
+        for (filed in SettingField::class.memberProperties.toList()) {
             if (filed is KMutableProperty<*>) {
 
                 val node = SettingsNode(filed, this)
@@ -83,7 +84,8 @@ class SettingsAdapter(preferenceName: String, private val context: Context) :
         val name: TextView = view.findViewById(R.id.item_name)
         val desc: TextView = view.findViewById(R.id.item_desc)
         name.text = settingsList[position].id
-        desc.text = settingsList[position].value
+//        desc.text = settingsList[position].value
+        desc.text = name.text
         view.setOnClickListener {
             val dialogBuilder = AlertDialog.Builder(context)
             val editText = EditText(context)
@@ -102,4 +104,6 @@ class SettingsAdapter(preferenceName: String, private val context: Context) :
 
 }
 
-class SettingField
+class SettingField(
+    var name:String = ""
+)
