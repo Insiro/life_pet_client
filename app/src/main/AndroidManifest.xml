@@ -28,6 +28,7 @@
         <activity android:name=".achievement.AdditionalAchievement" />
         <activity android:name=".pet.pet_info" />
         <activity android:name=".pet.pet_act" />
+        <activity android:name=".Settings"/>
     </application>
 
 </manifest>
