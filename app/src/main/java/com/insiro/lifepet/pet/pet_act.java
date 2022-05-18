@@ -104,7 +104,7 @@ public class pet_act extends AppCompatActivity {
         Query load_request= new Query(Field.Pets, Action.Activate,0);
         Query requestDataQuery= new Query(Field.Pets, Action.Update,-1);
         Pet pet= new Pet("0",pet_func.category,pet_func.friendly,pet_func.exp,pet_func.charLv);
-        QueryData newData= new QueryData(pet,Field.Pets);
+        QueryData newData= new QueryData(pet,Field.Pets,true);
         Builder.addQuery(load_request,null);
         Builder.addQuery(requestDataQuery,newData);
 
