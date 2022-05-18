@@ -23,6 +23,7 @@ import com.insiro.lifepet.entity.Pet;
 import com.insiro.lifepet.pet.pet_func;
 
 import java.util.ArrayList;
+import java.util.BitSet;
 
 public class pet_act extends AppCompatActivity {
     Pet pet;
@@ -98,7 +99,21 @@ public class pet_act extends AppCompatActivity {
         startActivityForResult(intent,1);
 
     }
+    public void update(){
+        QueryBundleBuilder Builder= new QueryBundleBuilder();
+        Query load_request= new Query(Field.Pets, Action.Activate,0);
+        Query requestDataQuery= new Query(Field.Pets, Action.Update,-1);
+        Pet pet= new Pet("0",pet_func.category,pet_func.friendly,pet_func.exp,pet_func.charLv);
+        QueryData newData= new QueryData(pet,Field.Pets);
+        Builder.addQuery(load_request,null);
+        Builder.addQuery(requestDataQuery,newData);
 
+        Bundle requestBundle=new Bundle();
+        requestBundle=Builder.build();
+        Intent intent = new Intent();
+        intent.putExtra("requestBundle",requestBundle);
+        startActivityForResult(intent,1);
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
