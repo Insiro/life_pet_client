@@ -65,6 +65,6 @@ public class pet_info extends AppCompatActivity {
         ResponseBundleReader queryBundleReader=new ResponseBundleReader(bundle);
         QueryData resData= queryBundleReader.getData(true);
         pet = (ArrayList<Pet>) resData.getData();
-
     }
+
 }
