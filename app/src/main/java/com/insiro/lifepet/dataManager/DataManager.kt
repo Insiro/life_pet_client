@@ -51,8 +51,7 @@ class DataManager : AppCompatActivity() {
             Action.Activate -> this.data.activateField(query.field)
             Action.Get -> {
                 val result = this.data.getField(query.field, query.index)
-                if (result != null)
-                    sendingDataBuilder.addData(QueryData(result, query.field, query.index == -1))
+                sendingDataBuilder.addData(QueryData(result, query.field, query.index == -1))
                 sendingDataBuilder.nextWithoutData()
             }
             Action.Update -> {
@@ -61,7 +60,8 @@ class DataManager : AppCompatActivity() {
             }
             Action.Add -> {
                 val queryData = this.queryReader.getData(query.field) ?: return
-                this.data.addField(query.field, queryData.data)
+                if (queryData.data !=null)
+                    this.data.addField(query.field, queryData.data)
             }
             Action.Remove -> this.data.removeField(query.field, query.index)
             Action.Sync -> this.data.syncField(query.field)
@@ -114,7 +114,7 @@ class Data(private val pref: SharedPreferences) {
     //endregion
     //region Load
     private fun loadUser() {
-        val userStr = pref.getString(Field.User.str, null) ?: TODO("TODO: Handle Null User")
+        val userStr = pref.getString(Field.User.str, null) ?: "null"
         this.user = Json.decodeFromString(userStr)
     }
 
@@ -212,7 +212,7 @@ class Data(private val pref: SharedPreferences) {
 
     //endregion
     //region Update
-    fun updateField(field: Field, data: Any, index: Int) {
+    fun updateField(field: Field, data: Any?, index: Int) {
         when (field) {
             Field.Achievements -> updateAchievements(data as Achievement, index)
             Field.Habits -> updateHabits(data as Habit, index)

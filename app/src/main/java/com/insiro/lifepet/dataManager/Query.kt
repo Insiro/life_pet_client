@@ -43,7 +43,7 @@ enum class Field(val str: String) {
     AchieveCate("AchieveCate");
 }
 
-open class QueryData(val data: Any, val field: Field, private val isArray: Boolean = false) {
+open class QueryData(val data: Any?, val field: Field, private val isArray: Boolean = false) {
     fun serialize(): String {
         if (isArray) return arraySerialize()
         val seData = when (this.field) {
