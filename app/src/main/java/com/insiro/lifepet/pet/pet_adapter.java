@@ -3,6 +3,7 @@ package com.insiro.lifepet.pet;
 import static java.lang.String.format;
 
 import android.content.Context;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,12 @@ public class pet_adapter extends BaseAdapter {
         ImageView petImage =view.findViewById(R.id.item_image);
         TextView petCategory=view.findViewById(R.id.item_sub);
         TextView petLv=view.findViewById(R.id.item_desc);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
         petImage.setImageResource(sample.get(position).getId());
         petCategory.setText(sample.get(position).getPetCategory());
         petLv.setText(format("%d", sample.get(position).getLevel()));

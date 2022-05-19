@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ListView;
 
 import com.insiro.lifepet.R;
@@ -34,7 +35,7 @@ public class pet_info extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pet_info);
         this.getQueryData();
-        ListView petList=findViewById(R.id.pet_info_petlist);
+        GridView petList=findViewById(R.id.pet_info_petlist);
         final pet_adapter pAdapter= new pet_adapter(this, petInfoList);
         Pet petinfo;
         for(int i=0;i<pet.size();i++){
@@ -47,7 +48,8 @@ public class pet_info extends AppCompatActivity {
         petList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                pet_data pet_dat=(pet_data)pAdapter.getItem(position);
+                
             }
         });
     }
