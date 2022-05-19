@@ -32,7 +32,7 @@ public class pet_act extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pet);
+        setContentView(R.layout.dashboard);
         ProgressBar progressBar = findViewById(R.id.act_pet_progressBar);
         progressBar.setIndeterminate(false);
         progressBar.setProgress(0);
@@ -116,7 +116,7 @@ public class pet_act extends AppCompatActivity {
         Builder.addQuery(requestDataQuery, newData);
         Bundle requestBundle = Builder.build();
         Intent intent = new Intent(this, DataManager.class);
-        intent.putExtra("requestBundle", requestBundle);
+        intent.putExtra("requestBundl   e", requestBundle);
         startActivityForResult(intent, 1);
     }
 

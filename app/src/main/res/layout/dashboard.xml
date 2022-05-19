@@ -18,8 +18,18 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toTopOf="@id/dashboard_Cat"
         />
+    <TextView
+        android:id="@+id/dashboard_bubbletext"
+        android:layout_width="300dp"
+        android:layout_height="120dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/dashboard_Cat"
+        android:text="야옹"
+        android:textSize="30sp"
+        android:textAlignment="center"
 
-
+        />
     <ImageView
         android:id="@+id/dashboard_Cat"
         android:src="@drawable/cat_ilust"
