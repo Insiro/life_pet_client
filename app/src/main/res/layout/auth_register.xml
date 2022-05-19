@@ -2,10 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#f8f8ff"
+    >
 
     <TableLayout
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -13,11 +15,22 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TableRow>
-
-            <TextView
+            <ImageView
+                android:id="@+id/auth_register_logo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ID" />
+                android:src="@drawable/logo"/>
+        </TableRow>
+
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:text="ID"
+                android:textColor="#b182c3"
+                />
 
             <EditText
                 android:id="@+id/regist_id"
@@ -30,7 +43,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="비밀번호" />
+                android:text="비밀번호"
+                android:textColor="#b182c3"
+                />
 
             <EditText
                 android:id="@+id/regist_pwd"
@@ -43,7 +58,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="아름" />
+                android:text="아름"
+                android:textColor="#b182c3"
+                />
 
             <EditText
                 android:id="@+id/regist_name"
@@ -56,7 +73,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="닉네임" />
+                android:text="닉네임"
+                android:textColor="#b182c3"
+                />
 
             <EditText
                 android:id="@+id/regist_nick"
@@ -69,7 +88,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="email" />
+                android:text="email"
+                android:textColor="#b182c3"
+                />
 
             <EditText
                 android:id="@+id/regist_mail"
@@ -82,7 +103,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Call" />
+                android:text="Call"
+                android:textColor="#b182c3"
+                />
 
             <EditText
                 android:id="@+id/regist_call"
@@ -93,7 +116,9 @@
             <Button android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_span="2"
-                android:id="@+id/register_btn"/>
+                android:id="@+id/register_btn"
+                android:text="회원가입"
+                />
 
         </TableRow>
     </TableLayout>

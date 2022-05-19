@@ -2,10 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#f8f8ff"
+    >
 
     <TableLayout
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -13,13 +15,21 @@
         app:layout_constraintTop_toTopOf="parent"
         android:stretchColumns="1"
         >
+        <TableRow>
+            <ImageView
+                android:id="@+id/auth_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/logo"/>
+        </TableRow>
 
         <TableRow>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ID" />
+                android:text="ID"
+                android:textColor="#b182c3"/>
 
             <EditText
                 android:id="@+id/auth_id"
@@ -32,13 +42,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Passwd" />
+                android:text="Passwd"
+                android:textColor="#b182c3"
+                />
 
             <EditText
                 android:id="@+id/auth_pw"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </TableRow>
+
         <TableRow>
             <Button
                 android:id="@+id/sign_btn"
