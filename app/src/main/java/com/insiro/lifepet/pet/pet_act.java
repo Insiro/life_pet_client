@@ -20,6 +20,7 @@ import com.insiro.lifepet.dataManager.Query;
 import com.insiro.lifepet.dataManager.QueryBundleBuilder;
 import com.insiro.lifepet.dataManager.QueryData;
 import com.insiro.lifepet.dataManager.ResponseBundleReader;
+import com.insiro.lifepet.databinding.ActivityPetBinding;
 import com.insiro.lifepet.entity.Pet;
 import com.insiro.lifepet.pet.pet_func;
 
@@ -28,11 +29,13 @@ import java.util.BitSet;
 
 public class pet_act extends AppCompatActivity {
     Pet pet;
-
+    ActivityPetBinding act_pet_binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pet);
+        act_pet_binding = ActivityPetBinding.inflate(getLayoutInflater());
+        setContentView(act_pet_binding.getRoot());
+
         ProgressBar progressBar = findViewById(R.id.act_pet_progressBar);
         progressBar.setIndeterminate(false);
         progressBar.setProgress(0);
