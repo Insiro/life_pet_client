@@ -9,26 +9,22 @@ import androidx.appcompat.app.AppCompatActivity
 import com.insiro.lifepet.R
 import com.insiro.lifepet.entity.UserFull
 import com.insiro.lifepet.dataManager.*
+import com.insiro.lifepet.databinding.AuthBinding
 
 class Auth : AppCompatActivity() {
-    lateinit var edit_id: EditText
-    lateinit var edit_pwd: EditText
-    lateinit var sign_btn: Button
-    lateinit var register_btn: Button
+    lateinit var binding:AuthBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.auth)
+        binding = AuthBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         bind()
     }
 
     private fun bind() {
-        edit_id = findViewById(R.id.auth_id)
-        edit_pwd = findViewById(R.id.auth_pw)
-        sign_btn = findViewById(R.id.sign_btn)
-        sign_btn.setOnClickListener {
+        binding.signBtn.setOnClickListener {
 
-            val id = edit_id.text.toString()
-            val pwd = edit_pwd.text.toString()
+            val id = binding.authId.text.toString()
+            val pwd = binding.authPw.text.toString()
             //TODO: send HTTP Request for auth
             val status = false
             if (status) {
@@ -48,10 +44,8 @@ class Auth : AppCompatActivity() {
                 Toast.makeText(this, "로그인에 실파해였습니다", Toast.LENGTH_LONG).show()
             }
         }
-        register_btn = findViewById(R.id.register_btn)
-        register_btn.setOnClickListener {
+        binding.registerBtn.setOnClickListener {
             val intent = Intent(this, Register::class.java)
-
             startActivity(intent)
         }
     }
