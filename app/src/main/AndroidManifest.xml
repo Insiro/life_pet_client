@@ -29,6 +29,7 @@
         <activity android:name=".pet.pet_info" />
         <activity android:name=".pet.pet_act" />
         <activity android:name=".Settings"/>
+        <activity android:name=".DashBoardActivity"/>
     </application>
 
 </manifest>
