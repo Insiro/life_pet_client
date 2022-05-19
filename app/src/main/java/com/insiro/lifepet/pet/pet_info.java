@@ -4,10 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.insiro.lifepet.R;
 import com.insiro.lifepet.dataManager.Action;
+import com.insiro.lifepet.dataManager.Data;
+import com.insiro.lifepet.dataManager.DataManager;
 import com.insiro.lifepet.dataManager.Field;
 import com.insiro.lifepet.dataManager.Query;
 import com.insiro.lifepet.dataManager.QueryBundleBuilder;
@@ -32,9 +36,20 @@ public class pet_info extends AppCompatActivity {
         this.getQueryData();
         ListView petList=findViewById(R.id.pet_info_petlist);
         final pet_adapter pAdapter= new pet_adapter(this, petInfoList);
-
+        Pet petinfo;
+        for(int i=0;i<pet.size();i++){
+            petinfo=pet.get(i);
+            petInfoList.add(new pet_data(R.drawable.littledeep_cat_file_style1,petinfo.getName(),
+                    petinfo.getCategory(),petinfo.getIntimacy(),
+                    (float) petinfo.getExp(),petinfo.getLevel()));
+        }
         petList.setAdapter(pAdapter);
+        petList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+            }
+        });
     }
     public void getQueryData(){
         petInfoList=new ArrayList();
@@ -45,16 +60,11 @@ public class pet_info extends AppCompatActivity {
         Builder.addQuery(requestDataQuery,null);
         Bundle requestBundle=new Bundle();
         requestBundle=Builder.build();
-        Intent intent = new Intent();
+        Intent intent = new Intent(this, DataManager.class);
         intent.putExtra("requestBundle",requestBundle);
         startActivityForResult(intent,1);
-        Pet petinfo;
-        for(int i=0;i<pet.size();i++){
-            petinfo=pet.get(i);
-            petInfoList.add(new pet_data(R.drawable.littledeep_cat_file_style1,
-                    petinfo.getCategory(),petinfo.getIntimacy(),
-                    (float) petinfo.getExp(),petinfo.getLevel()));
-        }
+
+
 
     }
     @Override

@@ -21,6 +21,7 @@ public class pet_func {
     public static int charLv=0;
     public static double totalExp=500;
     public static String category;
+    public static String name;
 
     public static void setCategory(String category) {
         pet_func.category = category;
@@ -40,6 +41,10 @@ public class pet_func {
 
     public static void setTotalExp(int Lv) {
         pet_func.totalExp = 500*Math.pow(1.2,Lv-1);
+    }
+
+    public static void setName(String name) {
+        pet_func.name = name;
     }
 
     public static double gain_exp(int achieve, double exp, double friendly) {
@@ -109,6 +114,7 @@ public class pet_func {
             friendly=-100;
         return friendly;
     }
+
 
 
 }

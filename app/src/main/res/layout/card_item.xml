@@ -35,13 +35,13 @@
                 android:id="@+id/item_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp" /> <!-- 물 마시기 -->
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/item_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="12sp" /> <!-- 달성 했으면 달성 표시 미달성이면 미달성 표시 -->
+                android:textSize="12sp" />
 
 
             <TextView
@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:textSize="15sp" /> <!-- 78% -->
+                android:textSize="15sp" />
         </LinearLayout>
 
     </RelativeLayout>
