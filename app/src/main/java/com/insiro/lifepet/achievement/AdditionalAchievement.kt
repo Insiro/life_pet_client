@@ -1,24 +1,21 @@
 package com.insiro.lifepet.achievement
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ListView
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.insiro.lifepet.R
+import com.insiro.lifepet.dataManager.*
 import com.insiro.lifepet.entity.Achievement
 import com.insiro.lifepet.entity.AchievementCategory
+import com.insiro.lifepet.entity.UserFull
 
 class AdditionalAchievement : AppCompatActivity() {
     private val dummyCate = AchievementCategory("dummyCate", "dummyCate", "dummy")
-    private val achieveList = arrayListOf<Achievement>(
-        Achievement("dummy1", "dummyUser", dummyCate, 10, 10),
-        Achievement("dummy2", "dummyUser", dummyCate, 10, 10),
-        Achievement("dummy3", "dummyUser", dummyCate, 10, 10),
-        Achievement("dummy4", "dummyUser", dummyCate, 10, 10),
-        Achievement("dummy5", "dummyUser", dummyCate, 10, 10),
-        Achievement("dummy6", "dummyUser", dummyCate, 10, 10),
-        Achievement("dummy7", "dummyUser", dummyCate, 10, 10),
-
-        )
+    private var achieveList = arrayListOf<Achievement>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,5 +40,32 @@ class AdditionalAchievement : AppCompatActivity() {
 
 
     }
+
+    fun loadAcieveList() {
+        val bundle = QueryBundleBuilder().addQuery(Query(Field.Pets, Action.Get)).build()
+        val intent = Intent(this, DataManager::class.java)
+        intent.putExtras(bundle)
+        var activityResultLauncher: ActivityResultLauncher<Intent>
+        activityResultLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { getResult(it) }
+    }
+
+    fun getResult(Result: ActivityResult) {
+        if (Result.data !=null) {
+            val bundle = Result.data!!.extras
+            if (bundle != null) {
+                val reader = ResponseBundleReader(bundle)
+                val resDataWrapper = reader.getData(false)
+
+                if(resDataWrapper !=null) {
+                    val resData = resDataWrapper.data as UserFull
+                    reader.next()
+                }
+            }
+        }
+
+    }
+
 
 }
