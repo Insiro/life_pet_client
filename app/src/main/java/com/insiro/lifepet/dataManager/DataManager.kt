@@ -3,7 +3,6 @@ package com.insiro.lifepet.dataManager
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.insiro.lifepet.entity.*
 import kotlinx.serialization.decodeFromString
@@ -37,12 +36,11 @@ class DataManager : AppCompatActivity() {
     }
 
     private fun getRequests() {
-        val count = this.queryReader.getQueryCount()
-        for (i: Int in 0..count) {
+        for (i: Int in 0..queryReader.max) {
             val query = this.queryReader.getQuery()
-            if (query != null) {
+            if (query != null)
                 processQuery(query)
-            }
+            queryReader.next()
         }
     }
 
@@ -51,7 +49,6 @@ class DataManager : AppCompatActivity() {
             Action.Commit -> this.data.commitField(query.field)
             Action.Activate -> this.data.activateField(query.field)
             Action.Get -> {
-                Log.e("action", "Get")
                 val result = this.data.getField(query.field, query.index)
                 sendingDataBuilder.addData(QueryData(result, query.field, query.index == -1))
             }
@@ -89,7 +86,6 @@ class Data(private val pref: SharedPreferences) {
                 return this.achievements[index]
             }
             Field.Habits -> {
-                Log.e("index", index.toString())
                 if (index == -1) return this.habits
                 if (index > this.habits.size) return null
                 return this.habits[index]
