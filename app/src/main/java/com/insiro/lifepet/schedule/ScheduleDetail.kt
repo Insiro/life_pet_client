@@ -1,4 +1,4 @@
-package com.insiro.lifepet.Schedule
+package com.insiro.lifepet.schedule
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

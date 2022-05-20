@@ -1,12 +1,12 @@
-package com.insiro.lifepet
+package com.insiro.lifepet.schedule
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.insiro.lifepet.R
 import android.widget.BaseAdapter
 import android.widget.TextView
 import androidx.activity.result.ActivityResult
@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.insiro.lifepet.dataManager.*
 import com.insiro.lifepet.databinding.ActivityScheduleBinding
 import com.insiro.lifepet.entity.Habit
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 class ScheduleActivity : AppCompatActivity() {
     private lateinit var scheduleBinding: ActivityScheduleBinding
@@ -47,30 +49,25 @@ class ScheduleActivity : AppCompatActivity() {
         activityResultLauncher.launch(intent)
     }
 
-    private fun updateSchedule(result: ActivityResult) {
-        try {
-            val bundle = result.data!!.extras
-            val responseReader = ResponseBundleReader(bundle!!)
-            Log.e("size", responseReader.max.toString())
-            Log.e("Logggg",responseReader.getData(true).toString())
-            val data: ArrayList<Habit> = responseReader.getData(true)!!.data as ArrayList<Habit>
+    private fun updateSchedule(result: ActivityResult) = try {
+        val bundle = result.data!!.extras
+        val responseReader = ResponseBundleReader(bundle!!)
+        val data: ArrayList<Habit> = responseReader.getData(true)!!.data as ArrayList<Habit>
 
-            val tempHabit = Habit("habit1", "habit1", 1, 2, "titititme")
+        //region add dummy data
+        val tempHabit = Habit("habit1", "habit1", 1, 2, "dummy_time")
+        data.add(tempHabit)
+        //endregion
 
-            data.add(tempHabit)
+        this.achieveAdapter.habits = data
+        this.achieveAdapter.notifyDataSetChanged()
 
-
-            this.achieveAdapter.habits = data
-            this.achieveAdapter.notifyDataSetChanged()
-
-        } catch (e: Exception) {
-            Log.e("Error",e.toString())
-            e.printStackTrace()
-        }
+    } catch (e: Exception) {
+        e.printStackTrace()
     }
 }
 
-class AchieveAdapter(context: Context) : BaseAdapter() {
+class AchieveAdapter(val context: Context) : BaseAdapter() {
     private val layoutInflater = LayoutInflater.from(context)
     var habits = ArrayList<Habit>()
     override fun getCount(): Int {
@@ -94,7 +91,9 @@ class AchieveAdapter(context: Context) : BaseAdapter() {
         desc.text = "목표 : ${habits[position].target}"
         sub.text = "현재 : ${habits[position].acheive}"
         view.setOnClickListener {
-
+            val intent = Intent(context, ScheduleDetail::class.java)
+            intent.putExtra("value", Json.encodeToString(habits[position]))
+            context.startActivity(intent)
         }
         return view
     }

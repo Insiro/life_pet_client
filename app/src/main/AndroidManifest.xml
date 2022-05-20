@@ -10,9 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LifePet">
         <activity
-            android:name=".ScheduleActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -30,6 +27,8 @@
         <activity android:name=".pet.pet_act" />
         <activity android:name=".Settings"/>
         <activity android:name=".DashBoardActivity"/>
+        <activity android:name=".schedule.ScheduleActivity"/>
+        <activity android:name=".schedule.ScheduleDetail"/>
     </application>
 
 </manifest>
