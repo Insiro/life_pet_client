@@ -38,8 +38,7 @@ class DataManager : AppCompatActivity() {
     private fun getRequests() {
         for (i: Int in 0..queryReader.max) {
             val query = this.queryReader.getQuery()
-            if (query != null)
-                processQuery(query)
+            query?.let { processQuery(it) }
             queryReader.next()
         }
     }

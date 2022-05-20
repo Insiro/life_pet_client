@@ -9,10 +9,11 @@ open class ResponseBundle(protected var bundle: Bundle) {
 
 open class ResponseBundleBuilder(private val bundle: Bundle) {
     private var max = 0
-    fun addData(data: QueryData) {
+    fun addData(data: QueryData): ResponseBundleBuilder {
         bundle.putString(queryString(max), data.field.str)
         bundle.putString(dataString(max), data.serialize())
         max++
+        return this
     }
 
     fun build(): Bundle {
