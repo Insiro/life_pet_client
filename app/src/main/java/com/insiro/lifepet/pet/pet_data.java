@@ -5,9 +5,9 @@ public class pet_data {
     private String petName;
     private int id;
     private int intimacy;
-    private float exp;
+    private double exp;
     private int level;
-    public pet_data(int id,String name, String petCategory, int intimacy, float exp, int level){
+    public pet_data(int id,String name, String petCategory, int intimacy, double exp, int level){
         this.id=id;
         this.petName=name;
         this.petCategory=petCategory;
@@ -31,7 +31,7 @@ public class pet_data {
         return this.intimacy;
     }
 
-    public float getExp() {
+    public double getExp() {
         return exp;
     }
 

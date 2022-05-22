@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LifePet">
         <activity
+            android:name=".PetDetail"
+            android:exported="false" />
+        <activity
             android:name=".ScheduleActivity"
             android:exported="false" />
         <activity
@@ -28,8 +31,8 @@
         <activity android:name=".achievement.AdditionalAchievement" />
         <activity android:name=".pet.pet_info" />
         <activity android:name=".pet.pet_act" />
-        <activity android:name=".Settings"/>
-        <activity android:name=".DashBoardActivity"/>
+        <activity android:name=".Settings" />
+        <activity android:name=".DashBoardActivity" />
     </application>
 
 </manifest>

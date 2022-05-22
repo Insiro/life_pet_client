@@ -42,7 +42,7 @@ public class pet_info extends AppCompatActivity {
             petinfo=pet.get(i);
             petInfoList.add(new pet_data(R.drawable.littledeep_cat_file_style1,petinfo.getName(),
                     petinfo.getCategory(),petinfo.getIntimacy(),
-                    (float) petinfo.getExp(),petinfo.getLevel()));
+                    petinfo.getExp(),petinfo.getLevel()));
         }
         petList.setAdapter(pAdapter);
         petList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

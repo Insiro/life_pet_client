@@ -110,8 +110,8 @@ public class pet_func {
         if(friendly>100){//most friendly is 100
             friendly=100;
         }
-        if(friendly<-100)//less friendly is -100
-            friendly=-100;
+        if(friendly<=0)//less friendly is 0
+            friendly=0;
         return friendly;
     }
 
