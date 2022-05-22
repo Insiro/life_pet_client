@@ -17,10 +17,6 @@ open class ResponseBundleBuilder(private val bundle: Bundle) {
         count++
     }
 
-    fun nextWithoutData() {
-        count++
-    }
-
     fun build(): Bundle {
         bundle.putInt("count", max)
         return bundle
@@ -32,7 +28,7 @@ open class ResponseBundleReader(bundle: Bundle) : ResponseBundle(bundle) {
         this.max = this.bundle.getInt("count")
     }
 
-    fun getData(isArray:Boolean): QueryData? {
+    fun getData(isArray: Boolean): QueryData? {
         val fieldStr = bundle.getString(queryString(count)) ?: return null
         val field = Field.valueOf(fieldStr)
         val data = bundle.getString(dataString(count)) ?: return null
