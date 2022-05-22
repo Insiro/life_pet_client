@@ -2,15 +2,20 @@ package com.insiro.lifepet.achievement;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.insiro.lifepet.R;
+import com.insiro.lifepet.ScheduleActivity;
 
 import java.util.ArrayList;
 
@@ -20,6 +25,7 @@ public class Achievement extends AppCompatActivity {
     ArrayList<String> arrayList;
     ArrayAdapter<String> arrayAdapter;
     Button plus;
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +62,32 @@ public class Achievement extends AppCompatActivity {
 
             startActivity(intent);
         });
+
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.achievement_bottomNavigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.bottom_menu1:
+                        Intent intent1 = new Intent(Achievement.this, ScheduleActivity.class);
+                        startActivity(intent1);
+                        break;
+                    case R.id.bottom_menu2:
+                        Intent intent2 = new Intent(Achievement.this, ScheduleActivity.class);
+                        startActivity(intent2);
+                        break;
+                    case R.id.bottom_menu3:
+                        Intent intent3 = new Intent(Achievement.this, ScheduleActivity.class);
+                        startActivity(intent3);
+                        break;
+                }
+                return true;
+            }
+        });
     }
 
 }
+
+
+
+

@@ -18,6 +18,12 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
+
+        </activity>
+        <activity android:name=".dataManager.DataManager" />
+        <activity android:name=".authy.Auth" />
+        <activity android:name=".authy.Register" />
+        <activity android:name=".achievement.Achievement"  android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,7 +35,7 @@
         <activity android:name=".authy.Register" />
         <activity android:name=".achievement.Achievement" />
         <activity android:name=".achievement.AdditionalAchievement" />
-        <activity android:name=".pet.pet_info" />
+        <activity android:name=".pet.pet_info"/>
         <activity android:name=".pet.pet_act" />
         <activity android:name=".Settings" />
         <activity android:name=".DashBoardActivity" />
