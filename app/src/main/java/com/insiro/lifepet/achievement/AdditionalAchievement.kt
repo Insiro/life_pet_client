@@ -61,6 +61,8 @@ class AdditionalAchievement : AppCompatActivity() {
                 if(resDataWrapper !=null) {
                     val resData = resDataWrapper.data as Achievement
                     reader.next()
+                    //Json 형식으로 날라온다
+
                     /*
                     //TODO: switch를 이용해서 업적 필터링
                     when(option){
