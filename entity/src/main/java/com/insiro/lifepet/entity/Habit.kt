@@ -8,4 +8,5 @@ data class Habit (
     var target:Int = 0,
     var acheive:Int = 0,
     var date:String,
+    var activated:Boolean =true
 )
