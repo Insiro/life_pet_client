@@ -41,17 +41,17 @@ class AdditionalAchievement : AppCompatActivity() {
 
     }
 
-    fun loadAcieveList() {
-        val bundle = QueryBundleBuilder().addQuery(Query(Field.Pets, Action.Get)).build()
+    fun loadAcieveList(option: Int) {
+        val bundle = QueryBundleBuilder().addQuery(Query(Field.Achievements, Action.Get)).build()
         val intent = Intent(this, DataManager::class.java)
         intent.putExtras(bundle)
         var activityResultLauncher: ActivityResultLauncher<Intent>
         activityResultLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
-        ) { getResult(it) }
+        ) { getResult(it, option) }
     }
 
-    fun getResult(Result: ActivityResult) {
+    fun getResult(Result: ActivityResult, option: Int) {
         if (Result.data !=null) {
             val bundle = Result.data!!.extras
             if (bundle != null) {
@@ -59,8 +59,24 @@ class AdditionalAchievement : AppCompatActivity() {
                 val resDataWrapper = reader.getData(false)
 
                 if(resDataWrapper !=null) {
-                    val resData = resDataWrapper.data as UserFull
+                    val resData = resDataWrapper.data as Achievement
                     reader.next()
+                    /*
+                    //TODO: switch를 이용해서 업적 필터링
+                    when(option){
+                        0 ->
+                            //달성 업적
+                        1 ->
+                        //미달성 업적
+                        2 ->
+                        //시작 가능한 업적
+                        3 ->
+                        //진행 중인 업적
+                    }
+                    */
+
+                    resData.target
+
                 }
             }
         }
