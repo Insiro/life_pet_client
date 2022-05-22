@@ -4,12 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.insiro.lifepet.DashBoardActivity
 import com.insiro.lifepet.entity.UserFull
 import com.insiro.lifepet.dataManager.*
 import com.insiro.lifepet.databinding.AuthBinding
 
 class Auth : AppCompatActivity() {
-    lateinit var binding:AuthBinding
+    lateinit var binding: AuthBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = AuthBinding.inflate(layoutInflater)
@@ -23,7 +24,9 @@ class Auth : AppCompatActivity() {
             val id = binding.authId.text.toString()
             val pwd = binding.authPw.text.toString()
             //TODO: send HTTP Request for auth
-            val status = false
+            var status = false
+            if (id == "test" && pwd == "test")
+                status = true
             if (status) {
                 val user = UserFull(id, "testUser", "user@example.com", "0000000000", "testUser")
                 val bundle = QueryBundleBuilder()
@@ -33,7 +36,7 @@ class Auth : AppCompatActivity() {
                         QueryData(user, Field.User)
                     ).addQuery(Query(Field.User, Action.Commit))
                     .build()
-                val intent = Intent()
+                val intent = Intent(this, DashBoardActivity::class.java)
                 intent.putExtras(bundle)
                 startActivity(intent)
                 //TODO: activity move to dashboard

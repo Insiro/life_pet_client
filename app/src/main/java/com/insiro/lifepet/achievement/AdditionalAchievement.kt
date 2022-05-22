@@ -1,9 +1,14 @@
 package com.insiro.lifepet.achievement
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ListView
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.insiro.lifepet.R
+import com.insiro.lifepet.dataManager.*
 import com.insiro.lifepet.entity.Achievement
 import com.insiro.lifepet.entity.AchievementCategory
 
@@ -28,7 +33,6 @@ class AdditionalAchievement : AppCompatActivity() {
         val listView: ListView = findViewById(R.id.additional_achieve_ListView)
         listView.adapter = adapter
 
-        val intent = getIntent()
         val bundle = intent.extras
         val option = bundle!!.getInt("option")
 
@@ -44,24 +48,23 @@ class AdditionalAchievement : AppCompatActivity() {
 
     }
 
-    fun loadAcieveList(option: Int) {
+    fun loadAchieveList(option: Int) {
         val bundle = QueryBundleBuilder().addQuery(Query(Field.Achievements, Action.Get)).build()
         val intent = Intent(this, DataManager::class.java)
         intent.putExtras(bundle)
-        var activityResultLauncher: ActivityResultLauncher<Intent>
-        activityResultLauncher = registerForActivityResult(
+        var activityResultLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) { getResult(it, option) }
     }
 
-    fun getResult(Result: ActivityResult, option: Int) {
-        if (Result.data !=null) {
+    private fun getResult(Result: ActivityResult, option: Int) {
+        if (Result.data != null) {
             val bundle = Result.data!!.extras
             if (bundle != null) {
                 val reader = ResponseBundleReader(bundle)
                 val resDataWrapper = reader.getData(false)
 
-                if(resDataWrapper !=null) {
+                if (resDataWrapper != null) {
                     val resData = resDataWrapper.data as Achievement
                     reader.next()
                     //Json 형식으로 날라온다

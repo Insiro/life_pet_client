@@ -45,15 +45,16 @@ enum class Field(val str: String) {
 
 open class QueryData(val data: Any?, val field: Field, private val isArray: Boolean = false) {
     fun serialize(): String {
+        val seData = if (data != null)
+            when (this.field) {
+                Field.User -> Json.encodeToString(this.data as UserFull)
+                Field.Achievements -> Json.encodeToString(this.data as Achievement)
+                Field.Pets -> Json.encodeToString(this.data as Pet)
+                Field.Habits -> Json.encodeToString(this.data as Habit)
+                Field.Friends -> Json.encodeToString(this.data as User)
+                else -> throw Exception("Not allowed Field")
+            } else "null"
         if (isArray) return arraySerialize()
-        val seData = when (this.field) {
-            Field.User -> Json.encodeToString(this.data as UserFull)
-            Field.Achievements -> Json.encodeToString(this.data as Achievement)
-            Field.Pets -> Json.encodeToString(this.data as Pet)
-            Field.Habits -> Json.encodeToString(this.data as Habit)
-            Field.Friends -> Json.encodeToString(this.data as User)
-            else -> throw Exception("Not allowed Field")
-        }
         return seData
     }
 
@@ -72,14 +73,15 @@ open class QueryData(val data: Any?, val field: Field, private val isArray: Bool
     companion object {
         fun deSerialize(str: String, field: Field, isArray: Boolean = false): QueryData {
             if (isArray) return arrayDeSerialize(str, field)
-            val seData: Any = when (field) {
-                Field.User -> Json.decodeFromString<UserFull>(str)
-                Field.Achievements -> Json.decodeFromString<Achievement>(str)
-                Field.Pets -> Json.decodeFromString<Pet>(str)
-                Field.Habits -> Json.decodeFromString<Habit>(str)
-                Field.Friends -> Json.decodeFromString<User>(str)
-                else -> throw Exception("Not allowed Field")
-            }
+            val seData: Any? = if (str == "null") null else
+                when (field) {
+                    Field.User -> Json.decodeFromString<UserFull>(str)
+                    Field.Achievements -> Json.decodeFromString<Achievement>(str)
+                    Field.Pets -> Json.decodeFromString<Pet>(str)
+                    Field.Habits -> Json.decodeFromString<Habit>(str)
+                    Field.Friends -> Json.decodeFromString<User>(str)
+                    else -> throw Exception("Not allowed Field")
+                }
             return QueryData(seData, field)
         }
 

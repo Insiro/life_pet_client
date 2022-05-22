@@ -18,11 +18,8 @@ open class QueryBundleBuilder() : QueryBundle(Bundle()) {
 
     private fun addData(data: QueryData) {
         when (data.field) {
-            Field.All, Field.AchieveCate ->
-                return
-            else -> {
-                bundle.putString(dataString(this.count), data.serialize())
-            }
+            Field.All, Field.AchieveCate -> return
+            else -> bundle.putString(dataString(this.count), data.serialize())
         }
     }
 

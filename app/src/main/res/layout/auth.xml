@@ -6,6 +6,7 @@
     android:background="#f8f8ff"
     android:gravity="center"
     android:orientation="vertical"
+    android:padding="30sp"
     tools:context=".authy.Auth">
 
     <ImageView
@@ -57,14 +58,12 @@
         android:id="@+id/sign_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_span="2"
         android:text="로그인" />
 
     <Button
         android:id="@+id/register_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_span="2"
         android:text="회원가입" />
 
 </LinearLayout>
