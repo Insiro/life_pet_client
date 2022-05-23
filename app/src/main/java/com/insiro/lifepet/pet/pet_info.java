@@ -34,16 +34,21 @@ public class pet_info extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pet_info);
-        this.getQueryData();
+        //this.getQueryData();
         GridView petList=findViewById(R.id.pet_info_petlist);
-        final pet_adapter pAdapter= new pet_adapter(this, petInfoList);
+        pet_adapter pAdapter= new pet_adapter();
+        pAdapter.addItem(new pet_data(0,"길고양이","길고양이",
+                0,0,1));
+
+        pAdapter.addItem(new pet_data(0,"길고양이","길고양이",
+                0,0,1));
         Pet petinfo;
-        for(int i=0;i<pet.size();i++){
+        /*for(int i=0;i<pet.size();i++){
             petinfo=pet.get(i);
-            petInfoList.add(new pet_data(R.drawable.littledeep_cat_file_style1,petinfo.getName(),
+            petInfoList.add(new pet_data(0,petinfo.getName(),
                     petinfo.getCategory(),petinfo.getIntimacy(),
                     petinfo.getExp(),petinfo.getLevel()));
-        }
+        }*/
         petList.setAdapter(pAdapter);
         petList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

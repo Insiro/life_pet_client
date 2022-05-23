@@ -46,6 +46,7 @@ class Auth : AppCompatActivity() {
         }
         binding.registerBtn.setOnClickListener {
             val intent = Intent(this, Register::class.java)
+
             startActivity(intent)
         }
     }
