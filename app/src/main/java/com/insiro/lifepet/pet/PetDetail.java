@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -53,6 +54,13 @@ public class PetDetail extends AppCompatActivity {
         expProg.setProgress((int) (exp/totalExp)*100);
         petIntimacy.setText("Friendship: "+intimacy+"/100");
         intimacyProg.setProgress(intimacy);
+        listButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(getApplicationContext(),pet_info.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
