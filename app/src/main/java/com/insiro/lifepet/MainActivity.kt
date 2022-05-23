@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             if (receiveData != null) {
                 val data = receiveData.data as UserFull?
                 if (data != null) {
-                    intent = Intent(this, DashBoardActivity::class.java)
+                    intent = Intent(this, DashBoard::class.java)
 
                 }
             }

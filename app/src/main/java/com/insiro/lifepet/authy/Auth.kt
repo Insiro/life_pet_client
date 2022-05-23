@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.insiro.lifepet.DashBoardActivity
+import com.insiro.lifepet.DashBoard
 import com.insiro.lifepet.entity.UserFull
 import com.insiro.lifepet.dataManager.*
 import com.insiro.lifepet.databinding.AuthBinding
@@ -36,7 +36,7 @@ class Auth : AppCompatActivity() {
                         QueryData(user, Field.User)
                     ).addQuery(Query(Field.User, Action.Commit))
                     .build()
-                val intent = Intent(this, DashBoardActivity::class.java)
+                val intent = Intent(this, DashBoard::class.java)
                 intent.putExtras(bundle)
                 startActivity(intent)
                 //TODO: activity move to dashboard
