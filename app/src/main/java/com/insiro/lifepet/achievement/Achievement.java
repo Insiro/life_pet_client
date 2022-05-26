@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.insiro.lifepet.R;
 import com.insiro.lifepet.ScheduleActivity;
+import com.insiro.lifepet.pet.pet_info;
 
 import java.util.ArrayList;
 
@@ -80,6 +81,9 @@ public class Achievement extends AppCompatActivity {
                         Intent intent3 = new Intent(Achievement.this, ScheduleActivity.class);
                         startActivity(intent3);
                         break;
+                    case R.id.bottom_menu4:
+                        Intent intent4 = new Intent(Achievement.this, pet_info.class);
+                        startActivity(intent4);
                 }
                 return true;
             }

@@ -60,7 +60,7 @@ public class pet_adapter extends BaseAdapter {
         TextView petName=convertView.findViewById(R.id.item_name);
         TextView petCategory=convertView.findViewById(R.id.item_sub);
         TextView petLv=convertView.findViewById(R.id.item_desc);
-        convertView.setOnClickListener(new View.OnClickListener() {
+        /*convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle=new Bundle();
@@ -70,11 +70,11 @@ public class pet_adapter extends BaseAdapter {
                 bundle.putInt("level",sample.get(position).getLevel());
                 bundle.putInt("intimacy",sample.get(position).getIntimacy());
                 bundle.putDouble("exp",sample.get(position).getExp());
-                Intent intent= new Intent(context,PetDetail.class);
+                Intent intent= new Intent(context,PetDetail.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("pet",bundle);
                 context.startActivity(intent);
             }
-        });
+        });*/
         petImage.setImageResource(R.drawable.cat_ilust);
         petName.setText(sample.get(position).getPetName());
         petCategory.setText(sample.get(position).getPetCategory());

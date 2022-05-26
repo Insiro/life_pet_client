@@ -5,13 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.insiro.lifepet.R;
+import com.insiro.lifepet.ScheduleActivity;
+import com.insiro.lifepet.achievement.Achievement;
 import com.insiro.lifepet.dataManager.Action;
 import com.insiro.lifepet.dataManager.DataManager;
 import com.insiro.lifepet.dataManager.Field;
@@ -34,6 +38,7 @@ public class PetDetail extends AppCompatActivity {
     TextView petIntimacy;
     ProgressBar intimacyProg;
     Pet pet;
+    BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,29 +54,51 @@ public class PetDetail extends AppCompatActivity {
         prePetBtn=findViewById(R.id.pet_detail_previous_button);
         listButton=findViewById(R.id.pet_detail_list_button);
         nextPetBtn=findViewById(R.id.pet_detail_next_button);
-        Intent intent=new Intent();
+        Intent intent=getIntent();
         Bundle bundle=intent.getBundleExtra("pet");
-        double exp=bundle.getDouble("exp");
-        int lv=bundle.getInt("lv");
-        double totalExp=500*Math.pow(1.2,lv-1);
-        int intimacy=bundle.getInt("intimacy");
         String name=bundle.getString("name");
         String category=bundle.getString("category");
+        int lv=bundle.getInt("level");
+        double totalExp=500*Math.pow(1.2,lv-1);
+        int intimacy=bundle.getInt("intimacy");
+        double exp=bundle.getDouble("exp");
         petName.setText(name);
         petCategory.setText(category);
         petLv.setText("LV: "+lv);
-        petExp.setText("Exp: "+exp+"/"+totalExp);
+        petExp.setText("Exp: "+exp+"/"+String.format("%.2f",totalExp));
         expProg.setProgress((int) (exp/totalExp)*100);
         petIntimacy.setText("Friendship: "+intimacy+"/100");
         intimacyProg.setProgress(intimacy);
         listButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(getApplicationContext(),pet_info.class);
-                startActivity(intent);
+                finish();
             }
         });
-
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.bottom_menu1:
+                        Intent intent1 = new Intent(PetDetail.this, Achievement.class);
+                        startActivity(intent1);
+                        break;
+                    case R.id.bottom_menu2:
+                        Intent intent2 = new Intent(PetDetail.this, ScheduleActivity.class);
+                        startActivity(intent2);
+                        break;
+                    case R.id.bottom_menu3:
+                        Intent intent3 = new Intent(PetDetail.this, ScheduleActivity.class);
+                        startActivity(intent3);
+                        break;
+                    case R.id.bottom_menu4:
+                        Intent intent4 = new Intent(PetDetail.this, pet_info.class);
+                        startActivity(intent4);
+                }
+                return true;
+            }
+        });
 
     }
 

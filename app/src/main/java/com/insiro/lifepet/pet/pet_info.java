@@ -4,12 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.insiro.lifepet.R;
+import com.insiro.lifepet.ScheduleActivity;
+import com.insiro.lifepet.achievement.Achievement;
 import com.insiro.lifepet.dataManager.Action;
 import com.insiro.lifepet.dataManager.Data;
 import com.insiro.lifepet.dataManager.DataManager;
@@ -30,6 +34,7 @@ public class pet_info extends AppCompatActivity {
 
     ArrayList<pet_data> petInfoList;
     ArrayList<Pet> pet;
+    BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,23 +43,55 @@ public class pet_info extends AppCompatActivity {
         GridView petList=findViewById(R.id.pet_info_petlist);
         pet_adapter pAdapter= new pet_adapter();
         pAdapter.addItem(new pet_data(0,"길고양이","길고양이",
-                0,0,1));
-
-        pAdapter.addItem(new pet_data(0,"길고양이","길고양이",
-                0,0,1));
+                0,0,10));
         Pet petinfo;
-        /*for(int i=0;i<pet.size();i++){
-            petinfo=pet.get(i);
-            petInfoList.add(new pet_data(0,petinfo.getName(),
-                    petinfo.getCategory(),petinfo.getIntimacy(),
-                    petinfo.getExp(),petinfo.getLevel()));
-        }*/
+        if(pet!=null) {
+            for (int i = 0; i < pet.size(); i++) {
+                petinfo = pet.get(i);
+                petInfoList.add(new pet_data(0, petinfo.getName(),
+                        petinfo.getCategory(), petinfo.getIntimacy(),
+                        petinfo.getExp(), petinfo.getLevel()));
+            }
+        }
         petList.setAdapter(pAdapter);
         petList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 pet_data pet_dat=(pet_data)pAdapter.getItem(position);
-                
+                Bundle bundle=new Bundle();
+                bundle.putString("name",pet_dat.getPetName());
+                bundle.putString("category",pet_dat.getPetCategory());
+                bundle.putInt("id",pet_dat.getId());
+                bundle.putInt("level",pet_dat.getLevel());
+                bundle.putInt("intimacy",pet_dat.getIntimacy());
+                bundle.putDouble("exp",pet_dat.getExp());
+                Intent intent= new Intent(getApplicationContext(),PetDetail.class);
+                intent.putExtra("pet",bundle);
+                startActivity(intent);
+            }
+        });
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.pet_info_bottomNavigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.bottom_menu1:
+                        Intent intent1 = new Intent(pet_info.this, Achievement.class);
+                        startActivity(intent1);
+                        break;
+                    case R.id.bottom_menu2:
+                        Intent intent2 = new Intent(pet_info.this, ScheduleActivity.class);
+                        startActivity(intent2);
+                        break;
+                    case R.id.bottom_menu3:
+                        Intent intent3 = new Intent(pet_info.this, ScheduleActivity.class);
+                        startActivity(intent3);
+                        break;
+                    case R.id.bottom_menu4:
+                        Intent intent4 = new Intent(pet_info.this, pet_info.class);
+                        startActivity(intent4);
+                }
+                return true;
             }
         });
     }
