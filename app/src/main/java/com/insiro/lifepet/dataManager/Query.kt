@@ -45,7 +45,8 @@ enum class Field(val str: String) {
 
 open class QueryData(val data: Any?, val field: Field, private val isArray: Boolean = false) {
     fun serialize(): String {
-        val seData = if (data != null)
+        if (isArray) return arraySerialize()
+        return if (data != null)
             when (this.field) {
                 Field.User -> Json.encodeToString(this.data as UserFull)
                 Field.Achievements -> Json.encodeToString(this.data as Achievement)
@@ -54,8 +55,6 @@ open class QueryData(val data: Any?, val field: Field, private val isArray: Bool
                 Field.Friends -> Json.encodeToString(this.data as User)
                 else -> throw Exception("Not allowed Field")
             } else "null"
-        if (isArray) return arraySerialize()
-        return seData
     }
 
     private fun arraySerialize(): String {
