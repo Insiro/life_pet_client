@@ -10,6 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LifePet">
         <activity
+            android:name=".pet.Popup" android:theme="@android:style/Theme.Dialog"/>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -28,7 +30,7 @@
         <activity android:name=".Settings" />
         <activity android:name=".ScheduleActivity" />
         <activity android:name=".pet.PetDetail" />
-        <activity android:name=".DashBoard"/>
+        <activity android:name=".DashBoard" />
     </application>
 
 </manifest>

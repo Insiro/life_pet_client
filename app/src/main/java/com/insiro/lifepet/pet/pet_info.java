@@ -3,6 +3,7 @@ package com.insiro.lifepet.pet;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.widget.GridView;
 import android.widget.ListView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.insiro.lifepet.DashBoard;
 import com.insiro.lifepet.NavigationBar;
 import com.insiro.lifepet.R;
@@ -42,13 +44,21 @@ public class pet_info extends AppCompatActivity {
     ArrayList<pet_data> petInfoList;
     ArrayList<Pet> pet;
     BottomNavigationView bottomNavigationView;
+    FloatingActionButton floatingActionButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pet_info);
-        this.addData();
         this.getQueryData();
         GridView petList=findViewById(R.id.pet_info_petlist);
+        floatingActionButton=findViewById(R.id.pet_info_floating_btn);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(getApplicationContext(),Popup.class);
+                startActivityForResult(intent,1);
+            }
+        });
         pet_adapter pAdapter= new pet_adapter();
         pAdapter.addItem(new pet_data(0,"길고양이","길고양이",
                 0,0,10));
@@ -94,11 +104,11 @@ public class pet_info extends AppCompatActivity {
         );
         intentLauncher.launch(intent);
     }
-    public void addData(){
+    public void addData(String petName){
         QueryBundleBuilder Builder = new QueryBundleBuilder();
         Query load_request = new Query(Field.Pets, Action.Activate, 0);
         Query requestDataQuery = new Query(Field.Pets, Action.Add, 0);
-        Pet pet = new Pet("0", "나비", "코리안숏헤어", 0, 0, 1);
+        Pet pet = new Pet("0", petName, "코리안숏헤어", 0, 0, 1);
         QueryData newData = new QueryData(pet, Field.Pets, false);
         Builder.addQuery(load_request, null);
         Builder.addQuery(requestDataQuery, newData);
@@ -116,5 +126,16 @@ public class pet_info extends AppCompatActivity {
         ResponseBundleReader queryBundleReader=new ResponseBundleReader(bundle);
         QueryData resData= queryBundleReader.getData(true);
         pet = (ArrayList<Pet>) resData.getData();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==1){
+            if (resultCode==RESULT_OK){
+                String petName=data.getStringExtra("name");
+                addData(petName);
+            }
+        }
     }
 }
