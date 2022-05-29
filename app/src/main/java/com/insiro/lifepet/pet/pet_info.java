@@ -72,7 +72,7 @@ public class pet_info extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.pet_info_bottomNavigation);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 it -> new NavigationBar(this).onNavigationItemSelected(it));
     }

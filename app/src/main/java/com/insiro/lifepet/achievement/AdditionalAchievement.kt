@@ -30,7 +30,7 @@ class AdditionalAchievement : AppCompatActivity() {
         setContentView(R.layout.additional_achieve)
 
         val adapter = ListAdapter(this, achieveList)
-        val listView: ListView = findViewById(R.id.additional_achieve_ListView)
+        val listView: ListView = findViewById(R.id.additional_achieve_listView)
         listView.adapter = adapter
 
         val bundle = intent.extras

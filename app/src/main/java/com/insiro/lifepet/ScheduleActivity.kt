@@ -31,7 +31,7 @@ class ScheduleActivity : AppCompatActivity() {
         scheduleBinding.btnPlus.setOnClickListener {
 
         }
-        scheduleBinding.bottomNavigation.setOnNavigationItemSelectedListener {
+        scheduleBinding.navigation.setOnNavigationItemSelectedListener {
             NavigationBar(this).onNavigationItemSelected(it)
         }
         activityResultLauncher =

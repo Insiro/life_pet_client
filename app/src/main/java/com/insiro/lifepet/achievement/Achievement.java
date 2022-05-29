@@ -61,7 +61,7 @@ public class Achievement extends AppCompatActivity {
             startActivity(intent);
         });
 
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.achievement_bottomNavigation);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 it -> new NavigationBar(this).onNavigationItemSelected(it));
     }

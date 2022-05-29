@@ -17,6 +17,7 @@ import com.insiro.lifepet.dataManager.Query;
 import com.insiro.lifepet.dataManager.QueryBundleBuilder;
 import com.insiro.lifepet.dataManager.QueryData;
 import com.insiro.lifepet.dataManager.ResponseBundleReader;
+import com.insiro.lifepet.databinding.ActivityDashBoardBinding;
 import com.insiro.lifepet.entity.Habit;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class DashBoard extends AppCompatActivity {
         setContentView(R.layout.activity_dash_board);
         dailyprog = findViewById(R.id.progress);
         bubbleText = findViewById(R.id.dashboard_bubbleText);
-        bottomNavigationView = findViewById(R.id.dashboard_bottomNavigation);
+        bottomNavigationView = findViewById(R.id.navigation);
         if (habits != null) {
             int total = habits.size();
             int achieve = 0;

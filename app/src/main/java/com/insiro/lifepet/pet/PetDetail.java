@@ -48,9 +48,9 @@ public class PetDetail extends AppCompatActivity {
         petCategory=findViewById(R.id.pet_detail_category);
         petLv= findViewById(R.id.pet_detail_lv);
         petExp=findViewById(R.id.pet_detail_exp);
-        expProg=findViewById(R.id.exp_progress);
+        expProg=findViewById(R.id.pet_detail_friendship_progress);
         petIntimacy=findViewById(R.id.pet_detail_intimacy);
-        intimacyProg=findViewById(R.id.friendship_progress);
+        intimacyProg=findViewById(R.id.pet_detail_friendship_progress);
         listButton=findViewById(R.id.pet_detail_list_button);
         Intent intent=getIntent();
         Bundle bundle=intent.getBundleExtra("pet");

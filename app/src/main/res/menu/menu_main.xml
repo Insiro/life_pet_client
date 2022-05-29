@@ -10,17 +10,17 @@
         android:title="Bottom_menu1"/>
 
     <item
-        android:id="@+id/bottom_menu3"
+        android:id="@+id/bottom_menu2"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_pets_24"
-        android:title="Bottom_menu3"/>
+        android:title="Bottom_menu2"/>
 
 
     <item
-        android:id="@+id/bottom_menu2"
+        android:id="@+id/bottom_menu3"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_calendar_month_24"
-        android:title="Bottom_menu2"/>
+        android:title="Bottom_menu3"/>
 
 
     <item
@@ -34,9 +34,5 @@
         android:enabled="true"
         android:icon="@drawable/ic_baseline_miscellaneous_services_24"
         android:title="Bottom_menu4"/>
-    <item
-        android:id="@+id/bottom_menu5"
-        android:enabled="true"
-        android:icon="@drawable/ic_baseline_miscellaneous_services_24"
-        android:title="Bottom_menu5"/>
+
 </menu>
