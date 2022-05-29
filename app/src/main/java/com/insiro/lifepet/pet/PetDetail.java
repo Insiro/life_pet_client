@@ -51,9 +51,7 @@ public class PetDetail extends AppCompatActivity {
         expProg=findViewById(R.id.exp_progress);
         petIntimacy=findViewById(R.id.pet_detail_intimacy);
         intimacyProg=findViewById(R.id.friendship_progress);
-        prePetBtn=findViewById(R.id.pet_detail_previous_button);
         listButton=findViewById(R.id.pet_detail_list_button);
-        nextPetBtn=findViewById(R.id.pet_detail_next_button);
         Intent intent=getIntent();
         Bundle bundle=intent.getBundleExtra("pet");
         String name=bundle.getString("name");
@@ -102,25 +100,4 @@ public class PetDetail extends AppCompatActivity {
 
     }
 
-    public void getData() {
-        QueryBundleBuilder Builder = new QueryBundleBuilder();
-        Query load_request = new Query(Field.Pets, Action.Activate, 0);
-        Query requestDataQuery = new Query(Field.Pets, Action.Get, 0);
-        Builder.addQuery(load_request, null);
-        Builder.addQuery(requestDataQuery, null);
-        Bundle requestBundle = new Bundle();
-        requestBundle = Builder.build();
-        Intent intent = new Intent(this, DataManager.class);
-        intent.putExtra("requestBundle", requestBundle);
-        startActivityForResult(intent, 1);
-    }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Intent intent = new Intent();
-        Bundle bundle = intent.getExtras();
-        ResponseBundleReader queryBundleReader = new ResponseBundleReader(bundle);
-        QueryData resData = queryBundleReader.getData(true);
-        pet = (Pet) resData.getData();
-    }
 }

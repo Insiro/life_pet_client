@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LifePet">
         <activity
-            android:name=".DashBoard"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".DashBoard"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -11,6 +11,7 @@ import android.widget.GridView;
 import android.widget.ListView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.insiro.lifepet.DashBoard;
 import com.insiro.lifepet.R;
 import com.insiro.lifepet.ScheduleActivity;
 import com.insiro.lifepet.achievement.Achievement;
@@ -76,7 +77,7 @@ public class pet_info extends AppCompatActivity {
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.bottom_menu1:
-                        Intent intent1 = new Intent(pet_info.this, Achievement.class);
+                        Intent intent1 = new Intent(pet_info.this, DashBoard.class);
                         startActivity(intent1);
                         break;
                     case R.id.bottom_menu2:
@@ -84,11 +85,11 @@ public class pet_info extends AppCompatActivity {
                         startActivity(intent2);
                         break;
                     case R.id.bottom_menu3:
-                        Intent intent3 = new Intent(pet_info.this, ScheduleActivity.class);
+                        Intent intent3 = new Intent(pet_info.this, pet_info.class);
                         startActivity(intent3);
                         break;
                     case R.id.bottom_menu4:
-                        Intent intent4 = new Intent(pet_info.this, pet_info.class);
+                        Intent intent4 = new Intent(pet_info.this, Achievement.class);
                         startActivity(intent4);
                 }
                 return true;
