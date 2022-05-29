@@ -123,7 +123,7 @@ class AchieveAdapter(val context: Context) : BaseAdapter() {
                 val intent = Intent(context, DataManager::class.java)
                 intent.putExtras(bundle)
                 context.startActivity(intent)
-                view.findViewById<TextView>(R.id.item_name).setText(item.target)
+                view.findViewById<TextView>(R.id.item_name).text = item.target.toString()
                 view.findViewById<TextView>(R.id.item_desc).text = "목표 : ${habits[position].target}"
                 view.findViewById<TextView>(R.id.item_sub).text = "현재 : ${habits[position].acheive}"
                 this.notifyDataSetChanged()
