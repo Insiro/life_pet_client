@@ -162,10 +162,7 @@
                 android:inputType="phone"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="374dp" />
-
         </TableRow>
-
-
     </TableLayout>
 
     <Button

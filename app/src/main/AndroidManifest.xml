@@ -11,9 +11,6 @@
         android:theme="@style/Theme.LifePet">
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".DashBoard"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,6 +28,7 @@
         <activity android:name=".Settings" />
         <activity android:name=".ScheduleActivity" />
         <activity android:name=".pet.PetDetail" />
+        <activity android:name=".DashBoard"/>
     </application>
 
 </manifest>

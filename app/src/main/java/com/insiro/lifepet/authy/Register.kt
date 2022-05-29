@@ -25,6 +25,7 @@ class Register : AppCompatActivity() {
                 binding.editName.text.toString()
             )
             //TODO: request register and check result of api
+
             var result = false
             val dialogBuilder = AlertDialog.Builder(this)
             if (result) {

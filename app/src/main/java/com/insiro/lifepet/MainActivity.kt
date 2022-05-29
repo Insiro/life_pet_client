@@ -3,6 +3,7 @@ package com.insiro.lifepet
 import android.content.Intent
 import android.os.Bundle
 import android.os.SystemClock.sleep
+import android.util.Log
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -38,7 +39,9 @@ class MainActivity : AppCompatActivity() {
             val receiveData = reader.getData(false)
             if (receiveData != null) {
                 val data = receiveData.data as UserFull?
+
                 if (data != null) {
+                    Log.d("user",data.user_id)
                     intent = Intent(this, DashBoard::class.java)
 
                 }

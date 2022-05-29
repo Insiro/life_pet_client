@@ -135,14 +135,4 @@
         android:text="@string/next_pet"
         />
 
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:labelVisibilityMode="unlabeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/menu_main"
-        tools:layout_editor_absoluteX="0dp" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
