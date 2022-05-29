@@ -72,6 +72,8 @@
         app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:itemTextColor="@drawable/bottom_icon_color"
+        app:itemIconTint="@drawable/bottom_icon_color"
         app:menu="@menu/menu_main"
         tools:layout_editor_absoluteX="0dp" />
 
