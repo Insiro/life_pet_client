@@ -1,5 +1,8 @@
 package com.insiro.lifepet;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,6 +22,7 @@ import com.insiro.lifepet.dataManager.QueryData;
 import com.insiro.lifepet.dataManager.ResponseBundleReader;
 import com.insiro.lifepet.databinding.ActivityDashBoardBinding;
 import com.insiro.lifepet.entity.Habit;
+import com.insiro.lifepet.entity.Pet;
 
 import java.util.ArrayList;
 
@@ -37,6 +41,7 @@ public class DashBoard extends AppCompatActivity {
         dailyprog = findViewById(R.id.progress);
         bubbleText = findViewById(R.id.dashboard_bubbleText);
         bottomNavigationView = findViewById(R.id.navigation);
+        getData();
         if (habits != null) {
             int total = habits.size();
             int achieve = 0;
@@ -55,24 +60,27 @@ public class DashBoard extends AppCompatActivity {
     }
 
     public void getData() {
-        QueryBundleBuilder Builder = new QueryBundleBuilder();
-        Query load_request = new Query(Field.Habits, Action.Activate, 0);
-        Query requestDataQuery = new Query(Field.Habits, Action.Get, -1);
-        Builder.addQuery(load_request, null);
-        Builder.addQuery(requestDataQuery, null);
-        Bundle requestBundle = Builder.build();
+        QueryBundleBuilder Builder= new QueryBundleBuilder();
+        Query load_request= new Query(Field.Habits, Action.Activate,0);
+        Query requestDataQuery= new Query(Field.Habits, Action.Get,-1);
+        Builder.addQuery(load_request,null);
+        Builder.addQuery(requestDataQuery,null);
+        Bundle requestBundle=Builder.build();
         Intent intent = new Intent(this, DataManager.class);
-        intent.putExtra("requestBundle", requestBundle);
-        startActivityForResult(intent, 1);
+        intent.putExtras(requestBundle);
+        ActivityResultLauncher<Intent> intentLauncher =  registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(), it->handleResponse(it)
+        );
+        intentLauncher.launch(intent);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Intent intent = new Intent();
-        Bundle bundle = intent.getExtras();
-        ResponseBundleReader queryBundleReader = new ResponseBundleReader(bundle);
-        QueryData resData = queryBundleReader.getData(true);
+    private void handleResponse(ActivityResult result){
+        Intent data = result.getData();
+        if(data ==null)
+            return;
+        Bundle bundle = result.getData().getExtras();
+        ResponseBundleReader queryBundleReader=new ResponseBundleReader(bundle);
+        QueryData resData= queryBundleReader.getData(true);
         habits = (ArrayList<Habit>) resData.getData();
     }
 }
