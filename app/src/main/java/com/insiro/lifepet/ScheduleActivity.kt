@@ -31,6 +31,9 @@ class ScheduleActivity : AppCompatActivity() {
         scheduleBinding.btnPlus.setOnClickListener {
 
         }
+        scheduleBinding.bottomNavigation.setOnNavigationItemSelectedListener {
+            NavigationBar(this).onNavigationItemSelected(it)
+        }
         activityResultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 updateSchedule(it)
@@ -99,7 +102,7 @@ class AchieveAdapter(val context: Context) : BaseAdapter() {
 
     private fun editDialog(view: View, position: Int, isEditMode: Boolean) {
         val item = habits[position]
-        var dialogBinding = DialogScheduleEditBinding.inflate(layoutInflater)
+        val dialogBinding = DialogScheduleEditBinding.inflate(layoutInflater)
         dialogBinding.editCurrent.setText(item.target.toString())
         dialogBinding.editTitle.setText(item.title)
         dialogBinding.editCurrent.setText(item.acheive.toString())
@@ -113,18 +116,18 @@ class AchieveAdapter(val context: Context) : BaseAdapter() {
             .setView(dialogBinding.root)
             .setTitle(if (isEditMode) "수정하기" else item.title)
             .setPositiveButton("저장") { _, _ ->
-            val bundle = QueryBundleBuilder()
-                .addQuery(Query(Field.Habits, Action.Activate))
-                .addQuery(Query(Field.Habits, Action.Update))
-                .build()
-            val intent = Intent(context, DataManager::class.java)
-            intent.putExtras(bundle)
-            context.startActivity(intent)
-            view.findViewById<TextView>(R.id.item_name).setText(item.target)
-            view.findViewById<TextView>(R.id.item_desc).text = "목표 : ${habits[position].target}"
-            view.findViewById<TextView>(R.id.item_sub).text = "현재 : ${habits[position].acheive}"
-            this.notifyDataSetChanged()
-        }.show()
+                val bundle = QueryBundleBuilder()
+                    .addQuery(Query(Field.Habits, Action.Activate))
+                    .addQuery(Query(Field.Habits, Action.Update))
+                    .build()
+                val intent = Intent(context, DataManager::class.java)
+                intent.putExtras(bundle)
+                context.startActivity(intent)
+                view.findViewById<TextView>(R.id.item_name).setText(item.target)
+                view.findViewById<TextView>(R.id.item_desc).text = "목표 : ${habits[position].target}"
+                view.findViewById<TextView>(R.id.item_sub).text = "현재 : ${habits[position].acheive}"
+                this.notifyDataSetChanged()
+            }.show()
 
     }
 
