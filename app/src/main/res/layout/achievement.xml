@@ -5,7 +5,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/background_color"
+    >
 
     <ImageView
         android:id="@+id/achieve_main_image"
@@ -22,7 +24,8 @@
 
     <TextView
         android:id="@+id/achieve_main_text"
-        android:text="대표업적: 10일동안 꾸준히 제시간에 기상"
+        android:text="@string/main_achievement"
+        android:textColor="@color/text_color"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/achieve_main_image"
@@ -52,7 +55,7 @@
         android:id="@+id/achieve_detail"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:text="+"
+        android:text="@string/plus"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.8"
@@ -79,7 +82,7 @@
         android:id="@+id/achieve_text1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="업적이름\n달성일: 2022-05-04 18:29"
+        android:text="@string/achievement_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.775"
@@ -88,7 +91,7 @@
         app:layout_constraintVertical_bias="0.775" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/achievement_bottomNavigation"
+        android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:labelVisibilityMode="unlabeled"

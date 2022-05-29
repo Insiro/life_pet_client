@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f8f8ff"
+    android:background="@color/background_color"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".authy.Auth">
@@ -23,8 +23,8 @@
             android:id="@+id/id_label"
             android:layout_width="100sp"
             android:layout_height="wrap_content"
-            android:text="ID"
-            android:textColor="#b182c3" />
+            android:text="@string/id"
+            android:textColor="@color/text_color" />
 
         <EditText
             android:id="@+id/auth_id"
@@ -43,8 +43,8 @@
             android:id="@+id/pwd_label"
             android:layout_width="100sp"
             android:layout_height="wrap_content"
-            android:text="Passwd"
-            android:textColor="#b182c3" />
+            android:text="@string/password"
+            android:textColor="@color/text_color" />
 
         <EditText
             android:id="@+id/auth_pw"
@@ -58,13 +58,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_span="2"
-        android:text="로그인" />
+        android:text="@string/login" />
 
     <Button
         android:id="@+id/register_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_span="2"
-        android:text="회원가입" />
+        android:text="@string/sign_up" />
 
 </LinearLayout>

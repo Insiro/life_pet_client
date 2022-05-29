@@ -10,19 +10,27 @@
         android:title="Bottom_menu1"/>
 
     <item
-        android:id="@+id/bottom_menu2"
-        android:enabled="true"
-        android:icon="@drawable/ic_baseline_search_24"
-        android:title="Bottom_menu2"/>
-
-    <item
         android:id="@+id/bottom_menu3"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_access_alarm_24"
+        android:icon="@drawable/ic_baseline_pets_24"
         android:title="Bottom_menu3"/>
+
+
+    <item
+        android:id="@+id/bottom_menu2"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_calendar_month_24"
+        android:title="Bottom_menu2"/>
+
 
     <item
         android:id="@+id/bottom_menu4"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_recent_actors_24"
+        android:title="Bottom_menu4"/>
+
+    <item
+        android:id="@+id/bottom_menu5"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_miscellaneous_services_24"
         android:title="Bottom_menu4"/>

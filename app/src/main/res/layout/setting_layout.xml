@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f8f8ff"
+    android:background="@color/background_color"
     >
 
     <TextView
@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:gravity="center"
-        android:text="Settings"
+        android:text="@string/setting"
+        android:textColor="@color/text_color"
         android:textAlignment="center"
         android:textSize="50sp"
         app:layout_constraintLeft_toLeftOf="parent"
