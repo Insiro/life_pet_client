@@ -37,17 +37,18 @@ public class pet_info extends AppCompatActivity {
     ArrayList<pet_data> petInfoList;
     ArrayList<Pet> pet;
     BottomNavigationView bottomNavigationView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pet_info);
-        GridView petList = findViewById(R.id.pet_info_petlist);
-        pet_adapter pAdapter = new pet_adapter();
-        pAdapter.addItem(new pet_data(0, "길고양이", "길고양이",
-                0, 0, 10));
+        this.addData();
+        this.getQueryData();
+        GridView petList=findViewById(R.id.pet_info_petlist);
+        pet_adapter pAdapter= new pet_adapter();
+        pAdapter.addItem(new pet_data(0,"길고양이","길고양이",
+                0,0,10));
         Pet petinfo;
-        if (pet != null) {
+        if(pet!=null) {
             for (int i = 0; i < pet.size(); i++) {
                 petinfo = pet.get(i);
                 petInfoList.add(new pet_data(0, petinfo.getName(),
@@ -59,16 +60,16 @@ public class pet_info extends AppCompatActivity {
         petList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                pet_data pet_dat = (pet_data) pAdapter.getItem(position);
-                Bundle bundle = new Bundle();
-                bundle.putString("name", pet_dat.getPetName());
-                bundle.putString("category", pet_dat.getPetCategory());
-                bundle.putInt("id", pet_dat.getId());
-                bundle.putInt("level", pet_dat.getLevel());
-                bundle.putInt("intimacy", pet_dat.getIntimacy());
-                bundle.putDouble("exp", pet_dat.getExp());
-                Intent intent = new Intent(getApplicationContext(), PetDetail.class);
-                intent.putExtra("pet", bundle);
+                pet_data pet_dat=(pet_data)pAdapter.getItem(position);
+                Bundle bundle=new Bundle();
+                bundle.putString("name",pet_dat.getPetName());
+                bundle.putString("category",pet_dat.getPetCategory());
+                bundle.putInt("id",pet_dat.getId());
+                bundle.putInt("level",pet_dat.getLevel());
+                bundle.putInt("intimacy",pet_dat.getIntimacy());
+                bundle.putDouble("exp",pet_dat.getExp());
+                Intent intent= new Intent(getApplicationContext(),PetDetail.class);
+                intent.putExtra("pet",bundle);
                 startActivity(intent);
             }
         });
@@ -76,29 +77,38 @@ public class pet_info extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 it -> new NavigationBar(this).onNavigationItemSelected(it));
     }
-
-    public void getQueryData() {
-        petInfoList = new ArrayList();
+    public void getQueryData(){
+        petInfoList=new ArrayList();
+        QueryBundleBuilder Builder= new QueryBundleBuilder();
+        Query load_request= new Query(Field.Pets, Action.Activate,0);
+        Query requestDataQuery= new Query(Field.Pets, Action.Get,-1);
+        Builder.addQuery(load_request,null);
+        Builder.addQuery(requestDataQuery,null);
+        Bundle requestBundle=Builder.build();
+        Intent intent = new Intent(this, DataManager.class);
+        intent.putExtra("requestBundle",requestBundle);
+        startActivityForResult(intent,1);
+    }
+    public void addData(){
         QueryBundleBuilder Builder = new QueryBundleBuilder();
         Query load_request = new Query(Field.Pets, Action.Activate, 0);
-        Query requestDataQuery = new Query(Field.Pets, Action.Get, -1);
+        Query requestDataQuery = new Query(Field.Pets, Action.Add, 0);
+        Pet pet = new Pet("0", "나비", "코리안숏헤어", 0, 0, 1);
+        QueryData newData = new QueryData(pet, Field.Pets, false);
         Builder.addQuery(load_request, null);
-        Builder.addQuery(requestDataQuery, null);
+        Builder.addQuery(requestDataQuery, newData);
+        Builder.addQuery(new Query(Field.Pets, Action.Commit,0),null);
         Bundle requestBundle = Builder.build();
         Intent intent = new Intent(this, DataManager.class);
         intent.putExtra("requestBundle", requestBundle);
         startActivityForResult(intent, 1);
-
-
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Intent intent = new Intent();
-        Bundle bundle = intent.getExtras();
-        ResponseBundleReader queryBundleReader = new ResponseBundleReader(bundle);
-        QueryData resData = queryBundleReader.getData(true);
+        Bundle bundle=data.getExtras();
+        ResponseBundleReader queryBundleReader=new ResponseBundleReader(bundle);
+        QueryData resData= queryBundleReader.getData(true);
         pet = (ArrayList<Pet>) resData.getData();
     }
 
