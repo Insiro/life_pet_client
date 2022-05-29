@@ -1,5 +1,8 @@
 package com.insiro.lifepet.pet;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -32,6 +35,8 @@ import com.insiro.lifepet.pet.pet_func;
 
 import java.util.ArrayList;
 
+import javax.xml.transform.Result;
+
 public class pet_info extends AppCompatActivity {
 
     ArrayList<pet_data> petInfoList;
@@ -57,21 +62,18 @@ public class pet_info extends AppCompatActivity {
             }
         }
         petList.setAdapter(pAdapter);
-        petList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                pet_data pet_dat=(pet_data)pAdapter.getItem(position);
-                Bundle bundle=new Bundle();
-                bundle.putString("name",pet_dat.getPetName());
-                bundle.putString("category",pet_dat.getPetCategory());
-                bundle.putInt("id",pet_dat.getId());
-                bundle.putInt("level",pet_dat.getLevel());
-                bundle.putInt("intimacy",pet_dat.getIntimacy());
-                bundle.putDouble("exp",pet_dat.getExp());
-                Intent intent= new Intent(getApplicationContext(),PetDetail.class);
-                intent.putExtra("pet",bundle);
-                startActivity(intent);
-            }
+        petList.setOnItemClickListener((parent, view, position, id) -> {
+            pet_data pet_dat=(pet_data)pAdapter.getItem(position);
+            Bundle bundle=new Bundle();
+            bundle.putString("name",pet_dat.getPetName());
+            bundle.putString("category",pet_dat.getPetCategory());
+            bundle.putInt("id",pet_dat.getId());
+            bundle.putInt("level",pet_dat.getLevel());
+            bundle.putInt("intimacy",pet_dat.getIntimacy());
+            bundle.putDouble("exp",pet_dat.getExp());
+            Intent intent= new Intent(getApplicationContext(),PetDetail.class);
+            intent.putExtra("pet",bundle);
+            startActivity(intent);
         });
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(
@@ -86,8 +88,11 @@ public class pet_info extends AppCompatActivity {
         Builder.addQuery(requestDataQuery,null);
         Bundle requestBundle=Builder.build();
         Intent intent = new Intent(this, DataManager.class);
-        intent.putExtra("requestBundle",requestBundle);
-        startActivityForResult(intent,1);
+        intent.putExtras(requestBundle);
+        ActivityResultLauncher<Intent> intentLauncher =  registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(), it->handleResponse(it)
+        );
+        intentLauncher.launch(intent);
     }
     public void addData(){
         QueryBundleBuilder Builder = new QueryBundleBuilder();
@@ -101,15 +106,15 @@ public class pet_info extends AppCompatActivity {
         Bundle requestBundle = Builder.build();
         Intent intent = new Intent(this, DataManager.class);
         intent.putExtra("requestBundle", requestBundle);
-        startActivityForResult(intent, 1);
+        startActivity(intent);
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Bundle bundle=data.getExtras();
+    private void handleResponse(ActivityResult result){
+        Intent data = result.getData();
+        if(data ==null)
+            return;
+        Bundle bundle = result.getData().getExtras();
         ResponseBundleReader queryBundleReader=new ResponseBundleReader(bundle);
         QueryData resData= queryBundleReader.getData(true);
         pet = (ArrayList<Pet>) resData.getData();
     }
-
 }

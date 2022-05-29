@@ -3,6 +3,7 @@ package com.insiro.lifepet.dataManager
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.insiro.lifepet.entity.*
 import kotlinx.serialization.decodeFromString
@@ -90,16 +91,16 @@ class Data(private val pref: SharedPreferences) {
                 return this.habits[index]
             }
             Field.Pets -> {
-                if (index > this.pets.size) return null
                 if (index == -1) return this.pets
+                if (index > this.pets.size) return null
                 return this.pets[index]
             }
             Field.User -> {
                 return this.user
             }
             Field.Friends -> {
-                if (index > this.friends.size) return null
                 if (index == -1) return this.friends
+                if (index > this.friends.size) return null
                 return this.friends[index]
             }
             else -> {
