@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,17 +14,14 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.insiro.lifepet.dataManager.*
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class Settings : AppCompatActivity() {
     private lateinit var settingListview: ListView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.setting_layout)
-        settingListview = findViewById(R.id.setting_list)
-        val settings = loadBaseSettings()
-        settingListview.adapter = SettingsAdapter(settings, this)
-
+        bind()
     }
 
     private fun loadBaseSettings(): ArrayList<SettingField> {
@@ -46,11 +42,20 @@ class Settings : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 }
-                .setNegativeButton("취소",null)
+                .setNegativeButton("취소", null)
                 .show()
         }
         settingList.add(signOutMenu)
         return settingList
+    }
+
+    private fun bind() {
+        setContentView(R.layout.setting_layout)
+        settingListview = findViewById(R.id.setting_list)
+        val settings = loadBaseSettings()
+        settingListview.adapter = SettingsAdapter(settings, this)
+        val navBar: BottomNavigationView = findViewById(R.id.bottomNavigation)
+        navBar.setOnNavigationItemSelectedListener { NavigationBar(this).onNavigationItemSelected(it) }
     }
 }
 

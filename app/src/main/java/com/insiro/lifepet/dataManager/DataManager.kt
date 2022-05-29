@@ -19,10 +19,10 @@ class DataManager : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         data = Data(getSharedPreferences("userInfo", MODE_PRIVATE))
         val reqData = intent.extras
-        handle_reqData(reqData!!)
+        handleReqData(reqData!!)
     }
 
-    private fun handle_reqData(reqData: Bundle) {
+    private fun handleReqData(reqData: Bundle) {
         this.queryReader = QueryBundleReader(reqData)
         getRequests()
         sendResult()
@@ -36,12 +36,10 @@ class DataManager : AppCompatActivity() {
     }
 
     private fun getRequests() {
-        val count = this.queryReader.getQueryCount()
-        for (i: Int in 0..count) {
+        for (i: Int in 0..queryReader.max) {
             val query = this.queryReader.getQuery()
-            if (query != null) {
-                processQuery(query)
-            }
+            query?.let { processQuery(it) }
+            queryReader.next()
         }
     }
 
@@ -52,7 +50,6 @@ class DataManager : AppCompatActivity() {
             Action.Get -> {
                 val result = this.data.getField(query.field, query.index)
                 sendingDataBuilder.addData(QueryData(result, query.field, query.index == -1))
-                sendingDataBuilder.nextWithoutData()
             }
             Action.Update -> {
                 val queryData = this.queryReader.getData(query.field) ?: return
@@ -60,7 +57,7 @@ class DataManager : AppCompatActivity() {
             }
             Action.Add -> {
                 val queryData = this.queryReader.getData(query.field) ?: return
-                if (queryData.data !=null)
+                if (queryData.data != null)
                     this.data.addField(query.field, queryData.data)
             }
             Action.Remove -> this.data.removeField(query.field, query.index)
@@ -83,13 +80,13 @@ class Data(private val pref: SharedPreferences) {
         when (field) {
             Field.AchieveCate -> return this.achievementCategories
             Field.Achievements -> {
+                if (index == -1) return this.achievements
                 if (index > this.achievements.size) return null
-                if (index ==-1) return this.achievements
                 return this.achievements[index]
             }
             Field.Habits -> {
+                if (index == -1) return this.habits
                 if (index > this.habits.size) return null
-                if (index ==-1) return this.habits
                 return this.habits[index]
             }
             Field.Pets -> {
@@ -309,7 +306,10 @@ class Data(private val pref: SharedPreferences) {
     }
 
     private fun syncAchieveCates() {
-        this.editor.putString(Field.AchieveCate.str, Json.encodeToString(this.achievementCategories))
+        this.editor.putString(
+            Field.AchieveCate.str,
+            Json.encodeToString(this.achievementCategories)
+        )
     }
     //TODO: Sync From Server or File
     //endregion

@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LifePet">
         <activity
-            android:name=".ScheduleActivity"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".DashBoard"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,8 +28,9 @@
         <activity android:name=".achievement.AdditionalAchievement" />
         <activity android:name=".pet.pet_info" />
         <activity android:name=".pet.pet_act" />
-        <activity android:name=".Settings"/>
-        <activity android:name=".DashBoardActivity"/>
+        <activity android:name=".Settings" />
+        <activity android:name=".ScheduleActivity" />
+        <activity android:name=".pet.PetDetail" />
     </application>
 
 </manifest>

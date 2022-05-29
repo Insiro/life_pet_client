@@ -38,7 +38,6 @@ public class pet_act extends AppCompatActivity {
         Intent intent = new Intent(this, DataManager.class);
         intent.putExtra("requestBundle", requestBundle);
         startActivityForResult(intent, 1);
-
     }
 
     public void update() {
