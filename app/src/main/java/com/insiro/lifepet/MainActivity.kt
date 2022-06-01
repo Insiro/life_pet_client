@@ -3,7 +3,6 @@ package com.insiro.lifepet
 import android.content.Intent
 import android.os.Bundle
 import android.os.SystemClock.sleep
-import android.util.Log
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -34,21 +33,18 @@ class MainActivity : AppCompatActivity() {
     private fun responseUser(result: ActivityResult) {
         val bundle = result.data?.extras
         var intent = Intent(this, Auth::class.java)
+        sleep(2000)
         if (bundle != null) {
             val reader = ResponseBundleReader(bundle)
             val receiveData = reader.getData(false)
             if (receiveData != null) {
                 val data = receiveData.data as UserFull?
-
                 if (data != null) {
-                    Log.d("user",data.user_id)
                     intent = Intent(this, DashBoard::class.java)
-
                 }
             }
         }
-        sleep(2000)
-
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()
         return

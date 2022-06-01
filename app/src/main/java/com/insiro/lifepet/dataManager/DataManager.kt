@@ -3,7 +3,6 @@ package com.insiro.lifepet.dataManager
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.insiro.lifepet.entity.*
 import kotlinx.serialization.decodeFromString
@@ -95,17 +94,13 @@ class Data(private val pref: SharedPreferences) {
                 if (index > this.pets.size) return null
                 return this.pets[index]
             }
-            Field.User -> {
-                return this.user
-            }
+            Field.User -> return this.user
             Field.Friends -> {
                 if (index == -1) return this.friends
                 if (index > this.friends.size) return null
                 return this.friends[index]
             }
-            else -> {
-                return null
-            }
+            else -> return null
         }
     }
 
@@ -167,7 +162,6 @@ class Data(private val pref: SharedPreferences) {
 
     //endregion
     //region Commit
-    //TODO: Upload Data to Server on Commits
     fun commitField(field: Field) {
         when (field) {
             Field.All -> {
@@ -182,8 +176,8 @@ class Data(private val pref: SharedPreferences) {
             Field.Pets -> commitPets()
             Field.User -> commitUser()
             Field.Friends -> commitFriends()
-            else -> {}
         }
+        this.editor.commit()
     }
 
     private fun commitUser() {

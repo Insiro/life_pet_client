@@ -1,7 +1,6 @@
 package com.insiro.lifepet.dataManager
 
 import android.os.Bundle
-import android.util.Log
 
 open class ResponseBundle(protected var bundle: Bundle) {
     var max = 0

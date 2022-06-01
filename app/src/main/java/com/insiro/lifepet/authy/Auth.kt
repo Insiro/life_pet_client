@@ -58,7 +58,7 @@ class Auth : AppCompatActivity() {
             var intent= Intent(this, DataManager::class.java)
             intent.putExtras(bundle)
             startActivity(intent)
-
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
             intent = Intent(this, DashBoard::class.java)
             startActivity(intent)
         } else {
