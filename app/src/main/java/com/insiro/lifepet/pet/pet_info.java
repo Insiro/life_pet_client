@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -60,8 +61,7 @@ public class pet_info extends AppCompatActivity {
             }
         });
         pet_adapter pAdapter= new pet_adapter();
-        pAdapter.addItem(new pet_data(0,"길고양이","길고양이",
-                0,0,10));
+        addData("길고양","코숏");
         Pet petinfo;
         if(pet!=null) {
             for (int i = 0; i < pet.size(); i++) {
@@ -70,6 +70,9 @@ public class pet_info extends AppCompatActivity {
                         petinfo.getCategory(), petinfo.getIntimacy(),
                         petinfo.getExp(), petinfo.getLevel()));
             }
+
+        }else{
+            Toast.makeText(getApplicationContext(),"No Pet",Toast.LENGTH_LONG).show();
         }
         petList.setAdapter(pAdapter);
         petList.setOnItemClickListener((parent, view, position, id) -> {
