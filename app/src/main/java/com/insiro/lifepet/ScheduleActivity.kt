@@ -17,6 +17,8 @@ import com.insiro.lifepet.dataManager.*
 import com.insiro.lifepet.databinding.ActivityScheduleBinding
 import com.insiro.lifepet.databinding.DialogScheduleEditBinding
 import com.insiro.lifepet.entity.Habit
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ScheduleActivity : AppCompatActivity() {
     private lateinit var scheduleBinding: ActivityScheduleBinding
@@ -28,8 +30,36 @@ class ScheduleActivity : AppCompatActivity() {
         setContentView(scheduleBinding.root)
         achieveAdapter = AchieveAdapter(this)
         scheduleBinding.achieveList.adapter = achieveAdapter
-        scheduleBinding.btnPlus.setOnClickListener {
+        scheduleBinding.ediBtn.setOnClickListener {
+            achieveAdapter.editMode = !achieveAdapter.editMode
+            scheduleBinding.header.text = if (achieveAdapter.editMode) "수정모드" else "습관"
+        }
+        scheduleBinding.plusBtn.setOnClickListener {
+            val dialogBinding = DialogScheduleEditBinding.inflate(layoutInflater)
+            dialogBinding.editCurrent.visibility = View.GONE
+            dialogBinding.ccur.visibility = View.GONE
+            AlertDialog.Builder(this)
+                .setNegativeButton("취소", null)
+                .setView(dialogBinding.root)
+                .setTitle("새로운 습관")
+                .setPositiveButton("저장") { _, _ ->
+                    val habit = Habit(
+                        this.achieveAdapter.habits.size.toString(),
+                        dialogBinding.editTitle.text.toString(),
+                        dialogBinding.editTarget.text.toString().toInt(),
+                        0,
+                        SimpleDateFormat("yyyy-MM-DD").format(Calendar.getInstance().time),
+                        dialogBinding.activate.isSelected
+                    )
+                    val bundle = QueryBundleBuilder()
+                        .addQuery(Query(Field.Habits, Action.Activate))
+                        .addQuery(Query(Field.Habits, Action.Update))
+                        .build()
+                    val intent = Intent(this, DataManager::class.java)
+                    intent.putExtras(bundle)
+                    startActivity(intent)
 
+                }.show()
         }
         scheduleBinding.navigation.setOnNavigationItemSelectedListener {
             NavigationBar(this).onNavigationItemSelected(it)
@@ -57,8 +87,8 @@ class ScheduleActivity : AppCompatActivity() {
         val data: ArrayList<Habit> = responseReader.getData(true)!!.data as ArrayList<Habit>
 
         //region add dummy data
-        val tempHabit = Habit("habit1", "habit1", 1, 2, "dummy_time")
-        data.add(tempHabit)
+//        val tempHabit = Habit("habit1", "habit1", 1, 2, "dummy_time")
+//        data.add(tempHabit)
         //endregion
 
         this.achieveAdapter.habits = data

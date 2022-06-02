@@ -39,6 +39,7 @@
                 android:layout_width="50sp"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:id="@+id/ccur"
                 android:text="현재" />
 
             <EditText
