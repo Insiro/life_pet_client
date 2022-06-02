@@ -23,11 +23,17 @@ import java.util.*
 class ScheduleActivity : AppCompatActivity() {
     private lateinit var scheduleBinding: ActivityScheduleBinding
     private lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
+    lateinit var updateLauncher: ActivityResultLauncher<Intent>
     private lateinit var achieveAdapter: AchieveAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         scheduleBinding = ActivityScheduleBinding.inflate(layoutInflater)
         setContentView(scheduleBinding.root)
+        bind()
+        updateScheduleForUpdate()
+    }
+
+    private fun bind() {
         achieveAdapter = AchieveAdapter(this)
         scheduleBinding.achieveList.adapter = achieveAdapter
         scheduleBinding.ediBtn.setOnClickListener {
@@ -53,12 +59,12 @@ class ScheduleActivity : AppCompatActivity() {
                     )
                     val bundle = QueryBundleBuilder()
                         .addQuery(Query(Field.Habits, Action.Activate))
-                        .addQuery(Query(Field.Habits, Action.Update))
+                        .addQuery(Query(Field.Habits, Action.Add), QueryData(habit, Field.Habits))
+                        .addQuery(Query(Field.Habits, Action.Commit))
                         .build()
                     val intent = Intent(this, DataManager::class.java)
                     intent.putExtras(bundle)
-                    startActivity(intent)
-
+                    updateLauncher.launch(intent)
                 }.show()
         }
         scheduleBinding.navigation.setOnNavigationItemSelectedListener {
@@ -68,7 +74,10 @@ class ScheduleActivity : AppCompatActivity() {
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 updateSchedule(it)
             }
-        updateScheduleForUpdate()
+        updateLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { _ ->
+                updateScheduleForUpdate()
+            }
     }
 
     private fun updateScheduleForUpdate() {
@@ -85,15 +94,8 @@ class ScheduleActivity : AppCompatActivity() {
         val bundle = result.data!!.extras
         val responseReader = ResponseBundleReader(bundle!!)
         val data: ArrayList<Habit> = responseReader.getData(true)!!.data as ArrayList<Habit>
-
-        //region add dummy data
-//        val tempHabit = Habit("habit1", "habit1", 1, 2, "dummy_time")
-//        data.add(tempHabit)
-        //endregion
-
         this.achieveAdapter.habits = data
         this.achieveAdapter.notifyDataSetChanged()
-
     } catch (e: Exception) {
         e.printStackTrace()
     }
@@ -102,7 +104,6 @@ class ScheduleActivity : AppCompatActivity() {
 class AchieveAdapter(val context: Context) : BaseAdapter() {
     private val layoutInflater = LayoutInflater.from(context)
     var editMode = false
-
 
     var habits = ArrayList<Habit>()
     override fun getCount(): Int {
@@ -129,12 +130,11 @@ class AchieveAdapter(val context: Context) : BaseAdapter() {
         return view
     }
 
-
     private fun editDialog(view: View, position: Int, isEditMode: Boolean) {
         val item = habits[position]
         val dialogBinding = DialogScheduleEditBinding.inflate(layoutInflater)
-        dialogBinding.editCurrent.setText(item.target.toString())
         dialogBinding.editTitle.setText(item.title)
+        dialogBinding.editTarget.setText(item.target.toString())
         dialogBinding.editCurrent.setText(item.acheive.toString())
         dialogBinding.activate.isSelected = item.activated
         dialogBinding.editTitle.isEnabled = isEditMode
@@ -146,19 +146,25 @@ class AchieveAdapter(val context: Context) : BaseAdapter() {
             .setView(dialogBinding.root)
             .setTitle(if (isEditMode) "수정하기" else item.title)
             .setPositiveButton("저장") { _, _ ->
+                val habit = Habit(
+                    position.toString(),
+                    dialogBinding.editTitle.text.toString(),
+                    dialogBinding.editTarget.text.toString().toInt(),
+                    dialogBinding.editCurrent.text.toString().toInt(),
+                    item.date,
+                    dialogBinding.activate.isSelected
+                )
                 val bundle = QueryBundleBuilder()
                     .addQuery(Query(Field.Habits, Action.Activate))
-                    .addQuery(Query(Field.Habits, Action.Update))
+                    .addQuery(
+                        Query(Field.Habits, Action.Update, position),
+                        QueryData(habit,Field.Habits)
+                    )
+                    .addQuery(Query(Field.Habits, Action.Commit))
                     .build()
                 val intent = Intent(context, DataManager::class.java)
                 intent.putExtras(bundle)
-                context.startActivity(intent)
-                view.findViewById<TextView>(R.id.item_name).text = item.target.toString()
-                view.findViewById<TextView>(R.id.item_desc).text = "목표 : ${habits[position].target}"
-                view.findViewById<TextView>(R.id.item_sub).text = "현재 : ${habits[position].acheive}"
-                this.notifyDataSetChanged()
+                (context as ScheduleActivity).updateLauncher.launch(intent)
             }.show()
-
     }
-
 }

@@ -3,6 +3,7 @@ package com.insiro.lifepet.dataManager
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.insiro.lifepet.entity.*
 import kotlinx.serialization.decodeFromString
