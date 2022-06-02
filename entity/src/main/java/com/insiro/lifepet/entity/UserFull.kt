@@ -7,4 +7,5 @@ data class UserFull(
     var nick_name:String,
     var email:String,
     var call:String,
-    var name:String)
+    var pwd: String = "",
+    var user_name:String)
