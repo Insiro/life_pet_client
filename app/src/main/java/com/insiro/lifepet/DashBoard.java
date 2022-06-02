@@ -43,6 +43,7 @@ public class DashBoard extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.navigation);
         getData();
         if (habits != null) {
+
             int total = habits.size();
             int achieve = 0;
             for (Habit habit : habits) {
