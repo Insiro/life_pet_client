@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -46,6 +47,7 @@ public class pet_info extends AppCompatActivity {
     ArrayList<Pet> pet;
     BottomNavigationView bottomNavigationView;
     FloatingActionButton floatingActionButton;
+    pet_adapter pAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +60,10 @@ public class pet_info extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent= new Intent(getApplicationContext(),Popup.class);
                 startActivityForResult(intent,1);
+                pAdapter.notifyDataSetChanged();
             }
         });
-        pet_adapter pAdapter= new pet_adapter();
+        pAdapter= new pet_adapter();
         addData("길고양","코숏");
         Pet petinfo;
         if(pet!=null) {
@@ -70,7 +73,7 @@ public class pet_info extends AppCompatActivity {
                         petinfo.getCategory(), petinfo.getIntimacy(),
                         petinfo.getExp(), petinfo.getLevel()));
             }
-
+            pAdapter.notifyDataSetChanged();
         }else{
             Toast.makeText(getApplicationContext(),"No Pet",Toast.LENGTH_LONG).show();
         }
@@ -96,6 +99,7 @@ public class pet_info extends AppCompatActivity {
         petInfoList=new ArrayList();
         QueryBundleBuilder Builder= new QueryBundleBuilder();
         Query load_request= new Query(Field.Pets, Action.Activate,0);
+
         Query requestDataQuery= new Query(Field.Pets, Action.Get,-1);
         Builder.addQuery(load_request,null);
         Builder.addQuery(requestDataQuery,null);
