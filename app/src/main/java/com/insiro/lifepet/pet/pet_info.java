@@ -104,11 +104,11 @@ public class pet_info extends AppCompatActivity {
         );
         intentLauncher.launch(intent);
     }
-    public void addData(String petName){
+    public void addData(String petName,String category){
         QueryBundleBuilder Builder = new QueryBundleBuilder();
         Query load_request = new Query(Field.Pets, Action.Activate, 0);
         Query requestDataQuery = new Query(Field.Pets, Action.Add, 0);
-        Pet pet = new Pet("0", petName, "코리안숏헤어", 0, 0, 1);
+        Pet pet = new Pet("0", petName, category, 0, 0, 1);
         QueryData newData = new QueryData(pet, Field.Pets, false);
         Builder.addQuery(load_request, null);
         Builder.addQuery(requestDataQuery, newData);
@@ -134,7 +134,8 @@ public class pet_info extends AppCompatActivity {
         if(requestCode==1){
             if (resultCode==RESULT_OK){
                 String petName=data.getStringExtra("name");
-                addData(petName);
+                String petCategory=data.getStringExtra("category");
+                addData(petName,petCategory);
             }
         }
     }
