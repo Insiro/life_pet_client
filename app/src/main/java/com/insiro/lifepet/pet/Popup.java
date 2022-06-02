@@ -32,8 +32,8 @@ public class Popup extends Activity {
                 if(petnameText.getText()==null){
                     Toast.makeText(getApplicationContext(),"이름을 입력하십시오",Toast.LENGTH_SHORT).show();
                 }else {
-                intent.putExtra("name",petnameText.getText());
-                intent.putExtra("category",petcategoryText.getText());
+                intent.putExtra("name",String.valueOf(petnameText.getText()));
+                intent.putExtra("category",String.valueOf(petcategoryText.getText()));
                 setResult(RESULT_OK,intent);
                 finish();
                 }
