@@ -50,11 +50,11 @@ public class pet_info extends AppCompatActivity {
 
         petList.setAdapter(pAdapter);
         petList.setOnItemClickListener((parent, view, position, id) -> {
-            pet_data pet_dat = (pet_data) pAdapter.getItem(position);
+            Pet pet_dat = (Pet) pAdapter.getItem(position);
             Bundle bundle = new Bundle();
-            bundle.putString("name", pet_dat.getPetName());
-            bundle.putString("category", pet_dat.getPetCategory());
-            bundle.putInt("id", pet_dat.getId());
+            bundle.putString("name", pet_dat.getName());
+            bundle.putString("category", pet_dat.getCategory());
+            bundle.putString("id", pet_dat.getId());
             bundle.putInt("level", pet_dat.getLevel());
             bundle.putInt("intimacy", pet_dat.getIntimacy());
             bundle.putDouble("exp", pet_dat.getExp());
