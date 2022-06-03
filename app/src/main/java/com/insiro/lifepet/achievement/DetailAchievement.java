@@ -27,20 +27,19 @@ public class DetailAchievement extends AppCompatActivity {
         String text="";
         String name = bundle.getString("name");
         String rate = bundle.getString("rate");
+        String category = bundle.getString("category");
 
-        int achievement_rate =Integer.parseInt(rate);
-
-        if(achievement_rate > 0 && achievement_rate <50)
-            imageView.setImageResource(R.drawable.cooper);
-        else if(achievement_rate > 50 && achievement_rate < 100)
-            imageView.setImageResource(R.drawable.silver);
-        else if(achievement_rate == 100)
-            imageView.setImageResource(R.drawable.gold);
+        if(category.equals("attend"))
+            imageView.setImageResource(R.drawable.logo);
+        else if(category.equals("achieve"))
+            imageView.setImageResource(R.drawable.achieve_ilust);
+        else if(category.equals("grow_up"))
+            imageView.setImageResource(R.drawable.cat_ilust);
         else{
-
+            //안드로이드 기본 이미지 삽입
         }
 
-        text = "업적: " + name + "\n달성률: " + rate +"%";
+        text = name + "\n달성률: " + rate +"%";
 
         textView.setText(text);
 

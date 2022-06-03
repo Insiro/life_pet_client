@@ -11,7 +11,7 @@
         android:id="@+id/detail_achievement_image"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:src="@drawable/gold"
+        android:src="@drawable/logo"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,7 +22,9 @@
 
     <TextView
         android:id="@+id/detail_achievement_detail"
-        android:text="@string/main_achievement"
+        android:text="세부업적"
+        android:textSize="30sp"
+        android:gravity="center"
         android:textColor="@color/text_color"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

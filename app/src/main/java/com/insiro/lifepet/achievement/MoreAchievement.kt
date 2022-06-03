@@ -2,12 +2,13 @@ package com.insiro.lifepet.achievement
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.AdapterView
+import android.os.Parcelable
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.insiro.lifepet.R
 import com.insiro.lifepet.entity.Achievement
 import com.insiro.lifepet.entity.AchievementCategory
+
 
 class MoreAchievement : AppCompatActivity() {
     private val achieve = AchievementCategory("dummyCate", "achieve", "dummy")
@@ -47,6 +48,7 @@ class MoreAchievement : AppCompatActivity() {
             val intent = Intent(this, DetailAchievement::class.java)
             intent.putExtra("name", achieveList[position].id)
             intent.putExtra("rate", (achieveList[position].achieve_time * 100/achieveList[position].target).toString())
+            intent.putExtra("category", achieveList[position].category.name)
             startActivity(intent)
         }
 
