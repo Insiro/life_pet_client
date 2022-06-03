@@ -90,6 +90,8 @@ public class pet_info extends AppCompatActivity {
         Intent intent = new Intent(this, DataManager.class);
         intent.putExtras(requestBundle);
         startActivity(intent);
+        pAdapter.sample.add(new Pet("{0}",petName,category,0,0,1));
+        pAdapter.notifyDataSetChanged();
     }
 
     private void handleResponse(ActivityResult result) {
