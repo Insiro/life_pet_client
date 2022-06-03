@@ -13,7 +13,7 @@
         android:id="@+id/achieve_main_image"
         android:layout_width="243dp"
         android:layout_height="349dp"
-        android:src="@mipmap/ic_launcher"
+        android:src="@drawable/gold"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
