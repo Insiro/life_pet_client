@@ -25,7 +25,8 @@
         <activity android:name=".authy.Auth" />
         <activity android:name=".authy.Register" />
         <activity android:name=".achievement.Achievement" />
-        <activity android:name=".achievement.AdditionalAchievement" />
+        <activity android:name=".achievement.MoreAchievement" />
+        <activity android:name=".achievement.DetailAchievement"/>
         <activity android:name=".pet.pet_info" />
         <activity android:name=".pet.pet_act" />
         <activity android:name=".Settings" />

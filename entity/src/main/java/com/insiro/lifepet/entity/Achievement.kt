@@ -5,6 +5,6 @@ open class Achievement(
     var id: String,
     var user: String,
     var category: AchievementCategory,
-    var target: Int = 0,
-    var achieve_time: Int = 0
+    var target: Int,
+    var achieve_time: Int
 )
