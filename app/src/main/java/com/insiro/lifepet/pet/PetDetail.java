@@ -48,7 +48,7 @@ public class PetDetail extends AppCompatActivity {
         petCategory.setText(category);
         petLv.setText("LV: " + lv);
         petExp.setText("Exp: " + exp + "/" + String.format("%.2f", totalExp));
-        expProg.setProgress((int) (exp / totalExp) * 100);
+        expProg.setProgress((int) (exp / totalExp* 100));
         petIntimacy.setText("Friendship: " + intimacy + "/100");
         intimacyProg.setProgress(intimacy);
         listButton.setOnClickListener(new View.OnClickListener() {
