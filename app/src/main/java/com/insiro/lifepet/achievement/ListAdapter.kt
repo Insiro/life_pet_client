@@ -19,7 +19,7 @@ class ListAdapter(val context: Context, val achieveList: ArrayList<Achievement>)
         val achieve = achieveList[position]
 
         name.text = achieve.id
-        percent.text = String.format("%s", achieve.achieved_time)
+        percent.text = String.format("%d", achieve.achieve_time/achieve.target *100)
 
         return view
     }
