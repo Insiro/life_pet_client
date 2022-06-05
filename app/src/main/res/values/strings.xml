@@ -15,7 +15,7 @@
     <string name="password">Passwd</string>
     <string name="login">로그인</string>
     <string name="sign_up">회원가입</string>
-    <string name="main_achievement">대표업적: 10일동안 꾸준히 제시간에 기상</string>
+    <string name="main_achievement">대표업적: 30일이상 접속하기</string>
     <string name="plus">+</string>
     <string name="achievement_name">android:text="업적이름\n달성일: 2022-05-04 18:29"</string>
     <string name="pet_detail_text">Pet Detail</string>

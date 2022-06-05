@@ -6,9 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,20 +41,6 @@ public class Achievement extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(getApplicationContext(), arrayList.get(i) + "이 선택되었습니다.", Toast.LENGTH_SHORT).show();
-
-                if(i==0){
-                    ImageView imageView = findViewById(R.id.achieve_image1);
-                    TextView textView = findViewById(R.id.achieve_text1);
-                    imageView.setImageResource(R.drawable.gold);
-                    textView.setText("습관 5일 연속 달성하기\n달성시간: 2022. 04. 16 14:34");
-
-                }
-                else{
-                    ImageView imageView = findViewById(R.id.achieve_image1);
-                    TextView textView = findViewById(R.id.achieve_text1);
-                    imageView.setImageResource(R.drawable.silver);
-                    textView.setText("습관 10일 연속 달성하기\n진행도: 80%");
-                }
             }
 
             @Override
@@ -67,7 +51,7 @@ public class Achievement extends AppCompatActivity {
 
         plus = findViewById(R.id.achieve_detail);
         plus.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), AdditionalAchievement.class);
+            Intent intent = new Intent(getApplicationContext(), MoreAchievement.class);
             Bundle bundle = new Bundle();
             bundle.putInt("option", spinner.getSelectedItemPosition());
             intent.putExtras(bundle);

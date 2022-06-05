@@ -2,17 +2,15 @@ package com.insiro.lifepet.achievement
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.widget.ListView
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.insiro.lifepet.R
-import com.insiro.lifepet.dataManager.*
 import com.insiro.lifepet.entity.Achievement
 import com.insiro.lifepet.entity.AchievementCategory
 
-class AdditionalAchievement : AppCompatActivity() {
+
+class MoreAchievement : AppCompatActivity() {
     private val achieve = AchievementCategory("dummyCate", "achieve", "dummy")
     private val grow_up = AchievementCategory("dummyCate", "grow_up", "dummy")
     private val attend = AchievementCategory("dummyCate", "attend", "dummy")
@@ -21,7 +19,7 @@ class AdditionalAchievement : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.additional_achieve)
+        setContentView(R.layout.more_achievement)
 
         val option = intent.getIntExtra("option", 0);
         if(option ==0){
@@ -45,6 +43,14 @@ class AdditionalAchievement : AppCompatActivity() {
         val adapter = ListAdapter(this, achieveList)
         val listView: ListView = findViewById(R.id.additional_achieve_listView)
         listView.adapter = adapter
+
+        listView.setOnItemClickListener { adapterView, view, position, id ->
+            val intent = Intent(this, DetailAchievement::class.java)
+            intent.putExtra("name", achieveList[position].id)
+            intent.putExtra("rate", (achieveList[position].achieve_time * 100/achieveList[position].target).toString())
+            intent.putExtra("category", achieveList[position].category.name)
+            startActivity(intent)
+        }
 
     }
 
