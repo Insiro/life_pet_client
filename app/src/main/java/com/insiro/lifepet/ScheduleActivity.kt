@@ -40,6 +40,7 @@ class ScheduleActivity : AppCompatActivity() {
             achieveAdapter.editMode = !achieveAdapter.editMode
             scheduleBinding.header.text = if (achieveAdapter.editMode) "수정모드" else "습관"
         }
+        
         scheduleBinding.plusBtn.setOnClickListener {
             val dialogBinding = DialogScheduleEditBinding.inflate(layoutInflater)
             dialogBinding.editCurrent.visibility = View.GONE
